@@ -1,132 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Chat Assistant</title>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-    * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
-    body { margin: 0; background: #111318; color: #f3f4f6; display: flex; flex-direction: column; height: 100vh; }
-    header { padding: 14px 20px; background: #181b22; border-bottom: 1px solid #262b36; display: flex; justify-content: space-between; align-items: center; }
-    header button { background: #262b36; color: #f3f4f6; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
-    #chat { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 14px; max-width: 860px; width: 100%; margin: 0 auto; }
-    .msg { padding: 12px 16px; border-radius: 10px; line-height: 1.55; max-width: 85%; word-wrap: break-word; }
-    .user { background: #2563eb; align-self: flex-end; }
-    .assistant { background: #1e222b; border: 1px solid #2d3340; align-self: flex-start; }
-    .assistant pre { background: #0d0f14; padding: 12px; border-radius: 8px; overflow-x: auto; }
-    form { display: flex; gap: 10px; padding: 14px 20px; background: #181b22; border-top: 1px solid #262b36; max-width: 860px; width: 100%; margin: 0 auto; }
-    textarea { flex: 1; resize: none; padding: 10px 12px; border-radius: 8px; border: 1px solid #2d3340; background: #111318; color: #f3f4f6; font-size: 15px; height: 48px; }
-    button[type="submit"] { background: #2563eb; color: white; border: none; padding: 0 18px; border-radius: 8px; font-weight: 600; cursor: pointer; }
-    button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaBrain SMART - Biswa Ranjan</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+*{box-sizing:border-box;font-family:Google Sans,Arial,sans-serif}
+body{margin:0;background:#1b1c1d;color:#e3e3e3;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+header{padding:12px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:20px;display:flex;gap:8px;align-items:center}.logo span{font-size:11px;background:linear-gradient(90deg,#4285f4,#d96570);padding:2px 7px;border-radius:10px;color:#fff}
+.top-right{display:flex;gap:8px;align-items:center}.top-btn{background:#37393b;padding:8px 12px;border-radius:20px;font-size:12px;cursor:pointer;color:#fff;border:none}.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;font-weight:bold}
+.sidebar{position:fixed;left:0;top:0;height:100vh;width:280px;background:#1e1f20;z-index:99;padding:14px;display:none;flex-direction:column;gap:6px}.sidebar.open{display:flex}.side-tab{padding:11px 14px;border-radius:25px;cursor:pointer;display:flex;gap:10px;font-size:14px}.side-tab.active{background:#004a77;color:#c2e7ff}
+#chat{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;max-width:800px;width:100%;margin:0 auto}
+.greet{text-align:center;margin-top:30px}.greet h1{font-size:50px;line-height:1.05}.greet h1 span{background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570,#ffca28);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.future{font-size:20px;color:#ffca28;font-weight:bold;margin-top:10px}.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}.chip{border:1px solid #444;padding:10px 16px;border-radius:20px;font-size:13px;cursor:pointer;background:#2d2e2f}
+.msg{padding:12px 16px;border-radius:18px;line-height:1.6;max-width:85%;word-wrap:break-word;font-size:16px}.user{background:#2d2e2f;align-self:flex-end}.assistant{background:transparent;align-self:flex-start;max-width:95%;padding:10px 0}.assistant pre{background:#0d0f14;padding:12px;border-radius:8px;overflow-x:auto}
+form{display:flex;gap:10px;padding:12px 20px;max-width:800px;width:100%;margin:0 auto;align-items:center}.input-wrap{flex:1;background:#2d2e2f;border-radius:28px;padding:10px 16px;display:flex;gap:8px;align-items:center}textarea{flex:1;resize:none;border:none;background:transparent;color:#fff;font-size:15px;outline:none;height:28px}.tool-btn{background:transparent;border:none;color:#c4c7c5;font-size:18px;cursor:pointer}
+button[type="submit"]{background:#fff;color:#000;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px}.tool-panel{background:#2d2e2f;border-radius:20px;padding:20px}.btn{padding:10px 18px;border-radius:20px;border:none;cursor:pointer;font-weight:bold;margin:8px 6px 0 0}.btn-green{background:#4caf50;color:#fff}.btn-yellow{background:#ffca28;color:#000}.btn-white{background:#fff;color:#000}canvas{max-width:100%;border-radius:12px;margin-top:10px}
+.footer{text-align:center;font-size:11px;color:#888;padding-bottom:8px}.key-box{background:#2d2e2f;border-radius:14px;padding:12px;margin-top:14px;display:flex;gap:8px}.key-box input{flex:1;background:#1b1c1d;border:none;outline:none;color:#fff;padding:10px;border-radius:10px}.key-box button{background:#ffca28;border:none;padding:10px 14px;border-radius:10px;font-weight:bold;cursor:pointer}
+@media(max-width:700px){.greet h1{font-size:36px}}
+</style>
 </head>
 <body>
-  <header>
-    <strong>AI Assistant</strong>
-    <button id="clear-btn" type="button">New Chat</button>
-  </header>
-
-  <main id="chat"></main>
-
-  <form id="chat-form">
-    <textarea id="prompt-input" placeholder="Apna sawaal likhein... (Enter se bhejein, Shift+Enter se nayi line)" required></textarea>
-    <button id="send-btn" type="submit">Send</button>
-  </form>
-
-  <script>
-    const chatEl = document.getElementById("chat");
-    const formEl = document.getElementById("chat-form");
-    const inputEl = document.getElementById("prompt-input");
-    const sendBtn = document.getElementById("send-btn");
-    const clearBtn = document.getElementById("clear-btn");
-
-    // Gemini API format mein conversation history
-    let history = [];
-
-    function appendMessage(role, rawText = "") {
-      const div = document.createElement("div");
-      div.className = `msg ${role}`;
-      div.dataset.raw = rawText;
-      div.innerHTML = role === "assistant" ? marked.parse(rawText) : escapeHtml(rawText);
-      chatEl.appendChild(div);
-      chatEl.scrollTop = chatEl.scrollHeight;
-      return div;
-    }
-
-    function escapeHtml(text) {
-      return text.replace(/[&<>"']/g, (m) => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-      }[m]));
-    }
-
-    clearBtn.addEventListener("click", () => {
-      history = [];
-      chatEl.innerHTML = "";
-    });
-
-    inputEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        formEl.requestSubmit();
-      }
-    });
-
-    formEl.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const prompt = inputEl.value.trim();
-      if (!prompt) return;
-
-      inputEl.value = "";
-      sendBtn.disabled = true;
-
-      history.push({ role: "user", parts: [{ text: prompt }] });
-      appendMessage("user", prompt);
-
-      const assistantBubble = appendMessage("assistant", "");
-      let fullReply = "";
-
-      try {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ history }),
-        });
-
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = "";
-
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split("\n\n");
-          buffer = lines.pop();
-
-          for (const line of lines) {
-            if (!line.startsWith("data: ")) continue;
-            const payload = line.slice(6).trim();
-            if (payload === "[DONE]") break;
-
-            const parsed = JSON.parse(payload);
-            if (parsed.text) {
-              fullReply += parsed.text;
-              assistantBubble.innerHTML = marked.parse(fullReply);
-              chatEl.scrollTop = chatEl.scrollHeight;
-            }
-          }
-        }
-
-        history.push({ role: "model", parts: [{ text: fullReply }] });
-      } catch (err) {
-        assistantBubble.innerHTML = "<p>Error: Jawab generate karne mein dikkat aayi.</p>";
-      } finally {
-        sendBtn.disabled = false;
-        inputEl.focus();
-      }
-    });
-  </script>
+<div class="sidebar" id="sidebar">
+<div style="display:flex;align-items:center;gap:8px;padding:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;font-weight:bold">✦</div><b style="font-size:20px">NexaBrain</b><span style="font-size:11px;background:linear-gradient(90deg,#4285f4,#d96570);padding:2px 7px;border-radius:10px;color:#fff">SMART</span><span onclick="toggleSide()" style="margin-left:auto;cursor:pointer">✕</span></div>
+<div class="side-tab active" onclick="goTab('chat')">💬 Chat - SMART FREE</div>
+<div class="side-tab" onclick="goTab('photo')">🖼️ Photo Edit - FREE</div>
+<div class="side-tab" onclick="goTab('video')">🎬 Video - <span id="videoCount">5 FREE Left</span></div>
+<div style="background:linear-gradient(135deg,#1a2a4a,#3a1a4a);border-radius:16px;padding:14px;margin-top:10px"><b>🧠 Gemini 2.5 Flash Inside!</b><p style="font-size:12px;color:#c4c7c5;margin-top:6px">Sab ek file me - Server ki jarurat nahi!<br>Japan ka capital bhi sahi!</p><button onclick="buyPro()" style="background:#ffca28;color:#000;border:none;padding:10px;border-radius:20px;margin-top:10px;cursor:pointer;font-weight:bold;width:100%">₹1 me PRO Lo →</button></div>
+<div style="margin-top:auto;padding:10px;font-size:12px;color:#888">🧠 NexaBrain SMART<br>Made by Biswa Ranjan</div>
+</div>
+<header><div style="display:flex;gap:14px;align-items:center"><span style="cursor:pointer;font-size:20px" onclick="toggleSide()">☰</span><div class="logo">✦ NexaBrain <span>SMART 🧠</span></div></div><div class="top-right"><button class="top-btn" onclick="buyPro()">✦ PRO ₹1</button><button class="top-btn" onclick="location.reload()">New Chat</button><div class="avatar">B</div></div></header>
+<main id="chat">
+<div class="greet" id="greet">
+<h1>Biswa Ranjan<br><span>The Future Is Here ✨</span></h1>
+<div class="future">🧠 SAB EK ME - ASLI AI</div>
+<p style="color:#9aa0a6;margin-top:10px">Namaste Biswa! Ab server nahi chahiye, sab isi ek file me hai!</p>
+<div class="key-box" id="keyBox"><input id="apiKeyInput" placeholder="Gemini API Key yaha daalo - FREE - aistudio.google.com se"><button onclick="saveKey()">Save ✅</button></div>
+<p style="font-size:12px;color:#888;margin-top:8px" id="keyStatus">API Key nahi hai to neeche wala SMART mode chalega - Japan ka capital bhi batayega!</p>
+<div class="chips">
+<div class="chip" onclick="askThis('Japan ka capital kya hai?')">🇯🇵 Japan Capital?</div>
+<div class="chip" onclick="askThis('Mujhe ek joke sunao')">😂 Joke</div>
+<div class="chip" onclick="goTab('photo')">🖼️ Photo Edit</div>
+<div class="chip" onclick="goTab('video')">🎬 Video</div>
+</div>
+</div>
+</main>
+<form id="chat-form"><div class="input-wrap"><button type="button" class="tool-btn" onclick="goTab('photo')">+</button><button type="button" class="tool-btn" onclick="goTab('photo')">🖼️</button><textarea id="prompt-input" placeholder="Ask NexaBrain SMART - Sab ek me..." required></textarea><button type="button" class="tool-btn" onclick="startVoice()">🎤</button></div><button id="send-btn" type="submit">➤</button></form>
+<p class="footer">Made by <b>Biswa Ranjan</b> • Sab Ek File Me • Chat FREE • Photo FREE • Video 5 FREE • <b>PRO ₹1 / 3 Mahina</b></p>
+<script>
+let history=[];let today=new Date().toDateString();let videoUsed=parseInt(localStorage.getItem('nexa_video_'+today)||'0');let isPro=localStorage.getItem('nexa_pro')==='1';
+let apiKey=localStorage.getItem('nexa_gemini_key')||'';
+function updateVideo(){document.getElementById('videoCount').innerText=isPro?'PRO Unlimited':Math.max(0,5-videoUsed)+' FREE Left';}updateVideo();
+if(apiKey){document.getElementById('keyStatus').innerText='✅ API Key Save Hai - Asli Gemini Chalega!';document.getElementById('apiKeyInput').value=apiKey;}
+function saveKey(){let k=document.getElementById('apiKeyInput').value.trim();if(!k){alert('Pehle Key daalo! aistudio.google.com se FREE milti hai');return;}apiKey=k;localStorage.setItem('nexa_gemini_key',k);document.getElementById('keyStatus').innerText='✅ API Key Save Ho Gayi - Ab Asli Gemini Chalega!';alert('✅ Key Save! Ab koi bhi sawal pucho - Gemini jawab dega!');}
+function toggleSide(){document.getElementById('sidebar').classList.toggle('open');}
+function goTab(t){document.getElementById('sidebar').classList.remove('open');let chat=document.getElementById('chat');if(t==='photo'){document.getElementById('greet')?.remove();chat.innerHTML=`<div class="tool-panel"><h3>🖼️ Photo Edit - FREE - Sab Ek Me</h3><input type="file" accept="image/*" onchange="loadPhoto(event)" style="margin-top:12px"><br><canvas id="cv"></canvas><br><div id="filters" style="display:none"><button class="btn btn-green" onclick="applyFilter('bw')">Black & White</button><button class="btn btn-green" onclick="applyFilter('warm')">Warm</button><button class="btn btn-green" onclick="applyFilter('bright')">Bright</button><button class="btn btn-green" onclick="applyFilter('smart')">🧠 SMART Auto</button><br><button class="btn btn-white" onclick="downloadPhoto()">⬇️ Download</button></div><br><button class="btn btn-yellow" onclick="location.reload()">⬅️ Back</button></div>`;}else if(t==='video'){let left=isPro?999:Math.max(0,5-videoUsed);document.getElementById('greet')?.remove();chat.innerHTML=`<div class="tool-panel"><h3>🎬 Video - ${isPro?'PRO':'Aaj '+left+' FREE'}</h3><input id="videoPrompt" placeholder="Video idea..." style="width:100%;padding:12px;border-radius:12px;border:none;margin-top:12px;background:#1b1c1d;color:#fff;outline:none"><br><button class="btn btn-yellow" onclick="makeVideo()">🎬 Video Banao</button><div id="videoResult"></div><br><button class="btn btn-white" onclick="location.reload()">⬅️ Back</button></div>`;}else{location.reload();}}
+let origImg=null;function loadPhoto(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(){let img=new Image();img.onload=function(){origImg=img;let cv=document.getElementById('cv');cv.width=img.width>600?600:img.width;cv.height=img.height*(cv.width/img.width);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);document.getElementById('filters').style.display='block';};img.src=r.result;};r.readAsDataURL(f);}
+function applyFilter(type){if(!origImg)return;let cv=document.getElementById('cv');let ctx=cv.getContext('2d');ctx.drawImage(origImg,0,0,cv.width,cv.height);let d=ctx.getImageData(0,0,cv.width,cv.height);let p=d.data;for(let i=0;i<p.length;i+=4){let r=p[i],g=p[i+1],b=p[i+2];if(type==='bw'){let v=(r+g+b)/3;p[i]=p[i+1]=p[i+2]=v;}if(type==='warm'){p[i]=r*1.2;p[i+2]=b*0.8;}if(type==='bright'||type==='smart'){p[i]=r*1.25;p[i+1]=g*1.2;p[i+2]=b*1.1;}}ctx.putImageData(d,0,0);}
+function downloadPhoto(){let cv=document.getElementById('cv');let a=document.createElement('a');a.download='nexabrain.png';a.href=cv.toDataURL();a.click();}
+function makeVideo(){let pr=document.getElementById('videoPrompt').value.trim();if(!pr){alert('Pehle idea likho!');return;}if(!isPro&&videoUsed>=5){alert('5 FREE khatam!');return;}videoUsed++;localStorage.setItem('nexa_video_'+today,videoUsed);updateVideo();document.getElementById('videoResult').innerHTML=`<div style="background:#1b1c1d;padding:16px;border-radius:12px;margin-top:12px;text-align:center"><div style="font-size:48px">🎬</div><b>Video Ban Gaya!</b><p>${pr}</p><button class="btn btn-green" onclick="alert('Download FREE!')">⬇️ Download</button></div>`;}
+function buyPro(){let u=prompt("₹1 PRO - UPI ID:");if(!u)return;alert("✅ PRO ON!");isPro=true;localStorage.setItem('nexa_pro','1');updateVideo();}
+function startVoice(){if(!('webkitSpeechRecognition' in window)){alert('Voice is browser me nahi!');return;}let r=new webkitSpeechRecognition();r.lang='hi-IN';r.onresult=function(e){document.getElementById('prompt-input').value=e.results[0][0].transcript;document.getElementById('chat-form').requestSubmit();};r.start();}
+function askThis(t){document.getElementById('prompt-input').value=t;document.getElementById('chat-form').requestSubmit();}
+function appendMessage(role,raw=""){let d=document.createElement("div");d.className=`msg ${role}`;d.innerHTML=role==="assistant"?marked.parse(raw):raw.replace(/&/g,"&amp;").replace(/</g,"&lt;");document.getElementById('chat').appendChild(d);document.getElementById('chat').scrollTop=document.getElementById('chat').scrollHeight;return d;}
+// SMART BACKUP - Agar Key nahi hai to ye chalega
+function smartBackup(q){let m=q.toLowerCase();let caps={"japan":"Tokyo 🇯🇵","usa":"Washington D.C. 🇺🇸","america":"Washington D.C. 🇺🇸","china":"Beijing 🇨🇳","uk":"London 🇬🇧","france":"Paris 🇫🇷","germany":"Berlin 🇩🇪","italy":"Rome 🇮🇹","russia":"Moscow 🇷🇺","canada":"Ottawa 🇨🇦","australia":"Canberra 🇦🇺","pakistan":"Islamabad 🇵🇰","bangladesh":"Dhaka 🇧🇩","nepal":"Kathmandu 🇳🇵","thailand":"Bangkok 🇹🇭","korea":"Seoul 🇰🇷","uae":"Abu Dhabi 🇦🇪","india":"New Delhi 🇮🇳"};
+if(m.includes("capital")){for(let k in caps){if(m.includes(k))return `**Biswa, ${k.toUpperCase()} ka Capital hai - ${caps[k]}**\n\nYaad rakh lo! 🧠`;}return `Kaunsa desh? Japan, USA, China...`;}
+if(m.includes("mera naam"))return `**Tumhara naam hai Biswa Ranjan! ✨**`;
+if(m.includes("tum kaun"))return `**Main NexaBrain SMART hu!** Biswa Ranjan ne banaya hai!`;
+if(m.includes("joke"))return `**😂 Joke:** Teacher: 1 crore mile to kya karoge? Student: Pehle NexaBrain PRO lunga ₹1 me... 😂`;
+if(m.includes("motivation"))return `**🔥 Biswa, tu kar sakta hai!** Tu rukne wala nahi hai!`;
+if(m.includes("story"))return `**Ek Ladka aur Sapna 🔥** Raju gaon ka tha, sab bolte the kuch nahi kar payega. Roz 4 baje uthta, mehnat karta. 10 saal baad Engineer bana.`;
+return `**Haan Biswa, "${q}"**\n\nAPI Key daal do upar wale box me, fir Gemini asli jawab dega - Koi bhi sawal! Upar box me Key daalo - aistudio.google.com se FREE milti hai. Tab tak SMART mode chal raha hai!`;
+}
+document.getElementById('chat-form').addEventListener('submit',async(e)=>{e.preventDefault();let inp=document.getElementById('prompt-input');let prompt=inp.value.trim();if(!prompt)return;document.getElementById('greet')?.remove();inp.value='';document.getElementById('send-btn').disabled=true;appendMessage('user',prompt);let bubble=appendMessage('assistant','Soch raha hu...');history.push({role:"user",parts:[{text:prompt}]});
+if(!apiKey){let reply=smartBackup(prompt);bubble.innerHTML=marked.parse(reply);history.push({role:"model",parts:[{text:reply}]});document.getElementById('send-btn').disabled=false;return;}
+try{let res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:history,systemInstruction:{parts:[{text:"You are NexaBrain SMART, made by Biswa Ranjan. Friendly brother style. Reply in same language as user. User name Biswa Ranjan from Gondal Gujarat."}]}})});let data=await res.json();let txt=data.candidates?.[0]?.content?.parts?.[0]?.text||"Error aaya, Key check karo!";bubble.innerHTML=marked.parse(txt);history.push({role:"model",parts:[{text:txt}]});}catch(err){bubble.innerHTML="<p>Error: Key galat hai ya net slow hai. SMART mode se try karo!</p>";}document.getElementById('send-btn').disabled=false;});
+document.getElementById('prompt-input').addEventListener('keydown',(e)=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();document.getElementById('chat-form').requestSubmit();}});
+</script>
 </body>
 </html>

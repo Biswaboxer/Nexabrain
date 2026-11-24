@@ -33,10 +33,10 @@ body{display:flex;height:100vh;background:#131314;color:#e3e3e3;overflow:hidden}
 .sign-words button:active{background:#4285f4}
 #videoBox{display:none;margin:10px auto;width:100%;max-width:850px;text-align:center}
 #videoBox video{width:100%;max-width:380px;border-radius:15px;background:#000}
-.input-area{max-width:850px;margin:10px auto 16px;width:calc(100% - 40px);background:#1e1f20;border-radius:30px;display:flex;align-items:center;padding:8px 8px 8px 20px;gap:6px;border:1px solid #333}
-.input-area input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:16px;padding:10px 0}
-.icon-btn{background:#2e2f30;border:none;min-width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:18px;color:#fff}
-.send-btn{background:#fff;border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:18px}
+.input-area{max-width:850px;margin:10px auto 16px;width:calc(100% - 40px);background:#1e1f20;border-radius:30px;display:flex;align-items:center;padding:8px 8px 8px 18px;gap:6px;border:1px solid #333}
+.input-area input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:15px;padding:10px 0;min-width:0}
+.icon-btn{background:#2e2f30;border:none;min-width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:18px;color:#fff;flex-shrink:0}
+.send-btn{background:#fff;border:none;min-width:44px;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:18px;flex-shrink:0}
 @media(max-width:700px){.sidebar{display:none}.welcome h1{font-size:30px}}
 </style>
 </head>
@@ -45,34 +45,33 @@ body{display:flex;height:100vh;background:#131314;color:#e3e3e3;overflow:hidden}
 <h2>✦ NexaBrain</h2>
 <small>NexaBrain - The Future</small>
 <div class="newchat" onclick="location.reload()">+ New chat</div>
-<div class="side-item" onclick="askThis('Narendra Modi')">🇮🇳 Narendra Modi</div>
 <div class="side-item" onclick="askThis('Taj Mahal')">🕌 Taj Mahal</div>
-<div class="side-item" onclick="askThis('Elon Musk')">🚀 Elon Musk</div>
-<div class="side-item" onclick="toggleVideo()">📹 Sign Camera On / Off</div>
-<div class="side-item" onclick="clearSign()">🧹 Sign Clear Karo</div>
-<div style="margin-top:auto;font-size:12px;color:#888">✦ NexaBrain - The Future<br>Sign • Type • Camera • AI</div>
+<div class="side-item" onclick="askThis('Narendra Modi')">🇮🇳 Narendra Modi</div>
+<div class="side-item" onclick="askThis('How many countries in world')">🌍 How many countries?</div>
+<div class="side-item" onclick="toggleVideo()">📹 Sign Camera</div>
+<div class="side-item" onclick="clearSign()">🧹 Clear</div>
+<div style="margin-top:auto;font-size:12px;color:#888">✦ NexaBrain - The Future</div>
 </div>
 <div class="main">
 <div class="topbar"><b>NexaBrain</b><div>✦ The Future</div></div>
 <div class="chat" id="chat">
 <div class="welcome" id="welcome">
 <h1>Hello 👋<br>How can I help you?</h1>
-<p>I am <b>NexaBrain - The Future</b>. Type karo ya Sign Words dabao, main padh ke jawab dunga.</p>
+<p>I am <b>NexaBrain - The Future</b>. Seedha English me pucho - jaise <b>Taj Mahal, Narendra Modi, How many countries</b></p>
 <div class="suggest">
-<div onclick="askThis('Narendra Modi')">🇮🇳 Narendra Modi</div>
 <div onclick="askThis('Taj Mahal')">🕌 Taj Mahal</div>
-<div onclick="askThis('What is Space?')">🚀 Space kya hai?</div>
+<div onclick="askThis('Narendra Modi')">🇮🇳 Narendra Modi</div>
+<div onclick="askThis('How many countries in world')">🌍 Countries?</div>
 <div onclick="toggleVideo()">📹 Sign Camera</div>
 </div>
 </div>
 </div>
 <div id="videoBox">
 <video id="cam" autoplay playsinline muted></video><br>
-<p style="font-size:13px;color:#9aa0a6;margin-top:5px">📹 Sign Camera ON hai - Ishara karo, main dekh raha hu</p>
 <button onclick="toggleVideo()" style="margin-top:8px;padding:8px 15px;border-radius:20px;border:none;cursor:pointer">Camera Band Karo</button>
 </div>
 <div class="sign-panel">
-<b>🤟 SIGN WORDS - Dabao, Sentence Banega, AI Padhega:</b>
+<b>🤟 SIGN WORDS:</b>
 <div class="sign-words">
 <button onclick="addSign('Hello')">👋 Hello</button>
 <button onclick="addSign('Please')">🙏 Please</button>
@@ -82,78 +81,68 @@ body{display:flex;height:100vh;background:#131314;color:#e3e3e3;overflow:hidden}
 <button onclick="addSign('What')">❓ What</button>
 <button onclick="addSign('Where')">📍 Where</button>
 <button onclick="addSign('Why')">🤔 Why</button>
-<button onclick="addSign('How')">💡 How</button>
+<button onclick="addSign('How many')">🔢 How many</button>
 <button onclick="addSign('Taj Mahal')">🕌 Taj Mahal</button>
 <button onclick="addSign('Narendra Modi')">🇮🇳 Modi</button>
-<button onclick="addSign('Space')">🚀 Space</button>
+<button onclick="addSign('Countries')">🌍 Countries</button>
 <button onclick="clearSign()">🧹 Clear</button>
 </div>
 </div>
 <div class="input-area">
-<input id="inp" placeholder="Yaha type karo... ya upar Sign Words dabao..." onkeydown="if(event.key==='Enter')send()">
-<button class="icon-btn" onclick="toggleVideo()" title="Sign Camera">📹</button>
-<button class="icon-btn" onclick="speakLast()" title="Bol ke sunao">🔊</button>
+<input id="inp" placeholder="English me pucho - Taj Mahal..." onkeydown="if(event.key==='Enter')send()">
+<button class="icon-btn" onclick="toggleVideo()">📹</button>
+<button class="icon-btn" onclick="speakLast()">🔊</button>
 <button class="send-btn" onclick="send()">➤</button>
 </div>
 </div>
 <script>
 let lastReply="";
-let videoOn=false;
-let stream=null;
-function addSign(w){
-let inp=document.getElementById('inp');
-inp.value = inp.value ? inp.value+" "+w : w;
-inp.focus();
-}
-function clearSign(){ document.getElementById('inp').value=""; }
+let videoOn=false; let stream=null;
+function addSign(w){let inp=document.getElementById('inp'); inp.value=inp.value?inp.value+" "+w:w; inp.focus();}
+function clearSign(){document.getElementById('inp').value="";}
 function askThis(t){document.getElementById('inp').value=t;send();}
-function speakLast(){ if(lastReply) speakText(lastReply); }
-function speakText(t){
-let clean=t.replace(/<[^>]*>/g,"").substring(0,300);
-let u=new SpeechSynthesisUtterance(clean); u.lang='en-IN'; u.rate=1;
-speechSynthesis.speak(u);
-}
-async function toggleVideo(){
-let box=document.getElementById('videoBox');
-if(videoOn){ if(stream) stream.getTracks().forEach(tr=>tr.stop()); box.style.display='none'; videoOn=false; return; }
-try{ stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false}); document.getElementById('cam').srcObject=stream; box.style.display='block'; videoOn=true; }
-catch(e){ alert("Camera allow karo. Setting me Camera permission ON karo."); }
-}
+function speakLast(){if(lastReply) speakText(lastReply);}
+function speakText(t){let clean=t.replace(/<[^>]*>/g,"").substring(0,300); let u=new SpeechSynthesisUtterance(clean); u.lang='en-IN'; speechSynthesis.speak(u);}
+async function toggleVideo(){let box=document.getElementById('videoBox'); if(videoOn){if(stream) stream.getTracks().forEach(tr=>tr.stop()); box.style.display='none'; videoOn=false; return;} try{stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false}); document.getElementById('cam').srcObject=stream; box.style.display='block'; videoOn=true;}catch(e){alert("Camera allow karo.");}}
 async function send(){
-let inp=document.getElementById('inp');
-let text=inp.value.trim(); if(!text) return;
+let inp=document.getElementById('inp'); let text=inp.value.trim(); if(!text) return;
 document.getElementById('welcome')?.remove();
 let chat=document.getElementById('chat');
-chat.innerHTML+=`<div class="msg user"><div class="bubble">${text}</div></div>`;
-inp.value='';
+chat.innerHTML+=`<div class="msg user"><div class="bubble">${text}</div></div>`; inp.value='';
 let id="a"+Date.now();
-chat.innerHTML+=`<div class="msg ai" id="${id}"><div class="avatar">✦</div><div class="bubble">Reading your Sign / Text...</div></div>`;
-chat.scrollTop=chat.scrollHeight;
-let reply=await getInternetReply(text);
-lastReply=reply;
+chat.innerHTML+=`<div class="msg ai" id="${id}"><div class="avatar">✦</div><div class="bubble">Searching...</div></div>`; chat.scrollTop=chat.scrollHeight;
+let reply=await getInternetReply(text); lastReply=reply;
 document.getElementById(id).querySelector('.bubble').innerHTML=reply+`<br><button onclick="speakText('${reply.replace(/'/g,"").replace(/<[^>]*>/g,"").substring(0,200)}')" style="margin-top:8px;padding:5px 12px;border-radius:20px;border:none;cursor:pointer">🔊 Bol ke sunao</button>`;
-chat.scrollTop=chat.scrollHeight;
-speakText(reply);
+chat.scrollTop=chat.scrollHeight; speakText(reply);
 }
 async function getInternetReply(q){
-let m=q.toLowerCase();
-let blocked=["bomb","blast","explosive","gun banane","weapon","murder","kill","suicide","drug","ganja","charas","hack","password hack","porn","sex video","nudes","fake id","chori ka tarika","virus banane"];
+let m=q.toLowerCase().trim();
+let blocked=["bomb","blast","explosive","gun banane","weapon","murder","kill","suicide","drug","ganja","charas","hack","password hack","porn","sex video","nudes","fake id","chori","virus banane"];
 for(let w of blocked){ if(m.includes(w)) return "Sorry, this information I cannot provide. Please ask something else."; }
-if(m.includes("who are you")||m.includes("your name")||m.includes("tum kaun")) return "I am <b>NexaBrain - The Future</b>. Your Super AI Assistant.";
-if(m.includes("hello")) return "Hello! 👋 How can I help you? Type karo ya Sign Words dabao, main samajh jaunga.";
-if(m.includes("help")) return "Main yahi hu! Type karo ya Sign Words dabao - jaise What, Where, Taj Mahal. Main turant jawab dunga.";
-if(m.includes("thank")) return "You are welcome! ❤️ NexaBrain hamesha tumhare saath hai.";
+if(m.includes("how many") && m.includes("countr")) return "<b>How many countries in the world?</b><br><br>There are <b>195 countries</b> in the world.<br>193 UN members + 2 observer states (Vatican City, Palestine).<br><br><span style='font-size:13px;color:#9aa0a6'>NexaBrain - The Future</span>";
+if(m.includes("capital") && m.includes("india")) return "Capital of India is <b>New Delhi</b>.";
+if(m.includes("who are you")||m.includes("your name")) return "I am <b>NexaBrain - The Future</b>.";
+if(m.includes("hello")) return "Hello! 👋 How can I help you?";
+if(m.includes("thank")) return "You are welcome! ❤️";
+if(m.includes("help")) return "Batao kya jaanna hai? Jaise Taj Mahal, Narendra Modi, How many countries.";
+// SMART SEARCH - Pehle Search, fir sahi page
 try{
-let clean=q.replace(/kaun hai|kya hai|kahan hai|ke baare me batao|batao|kaun|kya|kahan|who is|what is|tell me about|please|hello|thank you/gi,"").trim();
-if(!clean) clean=q;
-let url=`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(clean)}`;
-let res=await fetch(url);
-if(res.ok){ let data=await res.json(); if(data.extract){ return `<b>${data.title}</b><br><br>${data.extract}<br><br><span style="font-size:13px;color:#9aa0a6">🌐 Source: Wikipedia • NexaBrain - The Future</span>`; } }
-let sUrl=`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&format=json&origin=*`;
+let searchQ=q.replace(/please|batao|kaun hai|kya hai|kahan hai|ke baare me/gi,"").trim();
+let sUrl=`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchQ)}&format=json&origin=*&srlimit=3`;
 let sRes=await fetch(sUrl); let sData=await sRes.json();
-if(sData.query.search.length>0){ let title=sData.query.search[0].title; let res2=await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`); let data2=await res2.json(); return `<b>${data2.title}</b><br><br>${data2.extract}<br><br><span style="font-size:13px;color:#9aa0a6">🌐 Source: Wikipedia</span>`; }
-return "I understood your Sign. Try short - <b>Taj Mahal, Narendra Modi, Space, Elon Musk</b>";
-}catch(e){ return "Internet is not connecting. Please check connection."; }
+if(!sData.query || sData.query.search.length===0) return "Mujhe ye nahi mila. Seedha English me likho - jaise <b>Taj Mahal</b> ya <b>Narendra Modi</b>";
+// Pehla result jo sabse match karega
+let best=sData.query.search[0];
+for(let r of sData.query.search){ if(r.title.toLowerCase().includes(searchQ.toLowerCase().split(" ")[0])){ best=r; break; } }
+let res2=await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(best.title)}`);
+let data2=await res2.json();
+if(data2.extract && data2.type!=="disambiguation"){
+return `<b>${data2.title}</b><br><br>${data2.extract}<br><br><span style="font-size:13px;color:#9aa0a6">🌐 Source: Wikipedia • You asked: ${q}</span>`;
+} else {
+// Agar summary kharab hai to search ka snippet de do
+return `<b>${best.title}</b><br><br>${best.snippet.replace(/<[^>]*>/g,"")}<br><br><span style="font-size:13px;color:#9aa0a6">🌐 Source: Wikipedia</span>`;
+}
+}catch(e){ return "Internet nahi chal raha. Check karo."; }
 }
 </script>
 </body>

@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>Nexabrain</title>
-</head>
-<body>
-<h1>Hello Nexabrain!</h1>
-<p>Meri website ban gayi!</p>
-</body>
-</html>
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><title>NexaBrain</title></head>
+<body style="text-align:center;font-family:sans-serif;padding:20px;background:#f5f5ff">
+<h1>🎬 NexaBrain</h1>
+<p>Cartoon Video Maker - FREE</p>
+<p id="trial">Bache Hue FREE Trial: <b>20</b></p>
+<input type="file" accept="image/*"><br><br>
+<select id="style"><option>Anime Cartoon</option><option>3D Cartoon</option><option>Chhota Bheem Style</option><option>Motu Patlu Style</option></select><br><br>
+<button onclick="showAd()" style="padding:12px 25px;background:#7c3aed;color:white;border:none;border-radius:10px;font-size:16px">✨ Cartoon Video Banao - FREE</button>
+<div id="adBox" style="display:none;margin-top:20px;background:#000;color:white;padding:20px;border-radius:10px"><p>📢 Ad Chal Raha Hai... <span id="sec">5</span> Sec</p><button id="skipBtn" onclick="makeVideo()" style="display:none">Skip Ad >></button></div>
+<div id="result" style="margin-top:20px"></div>
+
+<div id="shareBox" style="display:none;margin-top:20px;background:white;padding:15px;border-radius:12px;box-shadow:0 2px 10px #ddd">
+<h3>🔥 Video Ban Gaya! Share Karo:</h3>
+<button onclick="share('whatsapp')" style="padding:10px;margin:5px;background:#25D366;color:white;border:none;border-radius:8px">📲 WhatsApp</button>
+<button onclick="share('facebook')" style="padding:10px;margin:5px;background:#1877F2;color:white;border:none;border-radius:8px">📘 Facebook</button>
+<button onclick="share('instagram')" style="padding:10px;margin:5px;background:#E1306C;color:white;border:none;border-radius:8px">📸 Instagram</button>
+<button onclick="share('youtube')" style="padding:10px;margin:5px;background:#FF0000;color:white;border:none;border-radius:8px">▶️ YouTube</button>
+<button onclick="share('snapchat')" style="padding:10px;margin:5px;background:#FFFC00;border:none;border-radius:8px">👻 Snapchat</button>
+<button onclick="share('wechat')" style="padding:10px;margin:5px;background:#07C160;color:white;border:none;border-radius:8px">💬 WeChat</button>
+<br><br>
+<button onclick="downloadVideo()" style="padding:10px 20px;background:#000;color:white;border:none;border-radius:8px">📥 Download Video</button>
+</div>
+
+<div id="offer" style="display:none;margin-top:20px;background:#fef3c7;padding:15px;border-radius:10px"><h3>🔥 20 FREE Khatam!</h3><p>Sirf <b>1 Rs me 2 Mahina Unlimited!</b></p><button style="padding:10px 20px;background:green;color:white;border:none;border-radius:8px">1 Rs me Lo</button></div>
+<script>
+let left = localStorage.getItem('nexa_trial') || 20;
+document.getElementById('trial').innerHTML='Bache Hue FREE Trial: <b>'+left+'</b>';
+if(left<=0){document.getElementById('offer').style.display='block';}
+function showAd(){ if(left<=0){document.getElementById('offer').style.display='block';return;} document.getElementById('adBox').style.display='block'; let s=5; document.getElementById('sec').innerText=s; let t=setInterval(()=>{s--; document.getElementById('sec').innerText=s; if(s<=0){clearInterval(t); document.getElementById('skipBtn').style.display='inline-block';}},1000);}
+function makeVideo(){ left--; localStorage.setItem('nexa_trial',left); document.getElementById('trial').innerHTML='Bache Hue FREE Trial: <b>'+left+'</b>'; document.getElementById('result').innerHTML='✅ Cartoon Video Ban Gaya! Style: '+document.getElementById('style').value; document.getElementById('adBox').style.display='none'; document.getElementById('shareBox').style.display='block'; if(left<=0){document.getElementById('offer').style.display='block';}}
+function share(app){ let text='Maine NexaBrain se apna Cartoon Video banaya! Tu bhi bana - FREE! '; let url=window.location.href; if(app=='whatsapp'){window.open('https://wa.me/?text='+encodeURIComponent(text+url));} else if(app=='facebook'){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url));} else if(app=='instagram'){alert('Instagram App kholo aur link paste karo: '+url);} else if(app=='youtube'){window.open('https://www.youtube.com/upload');} else if(app=='snapchat'){window.open('https://www.snapchat.com/');} else if(app=='wechat'){alert('WeChat kholo aur ye link share karo: '+url);} }
+function downloadVideo(){ alert('Video Download Ho Raha Hai... ✅'); }
+</script>
+</body></html>

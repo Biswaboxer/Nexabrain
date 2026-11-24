@@ -4,115 +4,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>NexaBrain INSTANT - Meri Tarah Fast</title>
+<title>NexaBrain SMART - Biswa Ranjan</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{display:flex;height:100vh;background:#1b1c1d;color:#e3e3e3;overflow:hidden}
-.sidebar{width:280px;background:#1e1f20;padding:12px;display:flex;flex-direction:column;gap:6px;overflow-y:auto}
-.logo{display:flex;align-items:center;gap:8px;padding:8px}.logo b{font-size:20px}.logo span{font-size:11px;background:linear-gradient(90deg,#4285f4,#d96570);padding:2px 7px;border-radius:10px;color:#fff}
-.tab{padding:11px 14px;border-radius:25px;cursor:pointer;display:flex;gap:10px;font-size:14px;color:#c4c7c5}.tab.active{background:#004a77;color:#c2e7ff}
-.plan-card{background:linear-gradient(135deg,#1a2a4a,#3a1a4a);border-radius:16px;padding:14px;margin-top:10px}.plan-card b{font-size:14px}.plan-card p{font-size:12px;color:#c4c7c5;margin-top:6px;line-height:1.5}.plan-card button{background:#ffca28;color:#000;border:none;padding:10px;border-radius:20px;margin-top:10px;cursor:pointer;font-weight:bold;font-size:13px;width:100%}
-.main{flex:1;display:flex;flex-direction:column}.topbar{display:flex;justify-content:space-between;padding:14px 20px;align-items:center}.model-pill{background:#2d2e2f;padding:8px 14px;border-radius:20px;font-size:14px}.avatar-top{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;font-weight:bold}
-.chat{flex:1;overflow-y:auto;padding:10px 20px;max-width:800px;margin:0 auto;width:100%}.welcome{margin-top:20px}.welcome h1{font-size:42px;line-height:1.15}.welcome h1 span{background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.welcome p{color:#9aa0a6;margin-top:10px}.price-box{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.price{background:#2d2e2f;border-radius:16px;padding:14px;flex:1;min-width:150px}.price b{font-size:14px}.price p{font-size:12px;color:#9aa0a6;margin-top:6px}.price.free{border:2px solid #4caf50}.price.pro{border:2px solid #ffca28}
-.msg{margin:16px 0;display:flex;gap:12px;line-height:1.7;font-size:16px}.msg.user{justify-content:flex-end}.msg.user .bubble{background:#2d2e2f;padding:12px 18px;border-radius:22px;max-width:85%}.msg.ai .bubble{max-width:92%}.ai-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:bold}
-.input-wrap{max-width:800px;margin:0 auto 14px;width:calc(100% - 40px)}.input-box{background:#2d2e2f;border-radius:28px;padding:12px 14px}.input-box input{width:100%;background:transparent;border:none;outline:none;color:#fff;font-size:16px;padding:6px 0}.input-tools{display:flex;justify-content:space-between;align-items:center;margin-top:6px}.tool-btn{background:transparent;border:none;color:#c4c7c5;font-size:20px;cursor:pointer;padding:6px}.send-btn{background:#fff;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer}
-.tool-panel{background:#2d2e2f;border-radius:16px;padding:16px;margin-top:14px}.tool-panel h3{font-size:16px}.tool-panel p{font-size:13px;color:#9aa0a6;margin-top:6px}.btn{padding:10px 16px;border-radius:20px;border:none;cursor:pointer;font-weight:bold;margin:6px 6px 0 0}.btn-green{background:#4caf50;color:#fff}.btn-yellow{background:#ffca28;color:#000}.btn-white{background:#fff;color:#000}canvas{max-width:100%;border-radius:12px;margin-top:10px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Google Sans,Arial,sans-serif}
+body{background:#1b1c1d;color:#e3e3e3;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px}
+.left-top{display:flex;align-items:center;gap:14px}.menu{font-size:20px;cursor:pointer}.logo{font-size:20px;display:flex;align-items:center;gap:8px}.logo span{font-size:11px;background:linear-gradient(90deg,#4285f4,#d96570);padding:2px 7px;border-radius:10px;color:#fff}
+.right-top{display:flex;gap:10px;align-items:center}.try-btn{background:#37393b;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer}.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;font-weight:bold}
+.sidebar{position:fixed;left:0;top:0;height:100vh;width:280px;background:#1e1f20;z-index:99;padding:14px;display:none;flex-direction:column;gap:6px}.sidebar.open{display:flex}.side-tab{padding:11px 14px;border-radius:25px;cursor:pointer;display:flex;gap:10px;font-size:14px}.side-tab.active{background:#004a77;color:#c2e7ff}
+.main{flex:1;display:flex;flex-direction:column;max-width:800px;margin:0 auto;width:100%;padding:0 20px}
+.chat{flex:1;overflow-y:auto;padding:20px 0}
+.greet{margin-top:40px;text-align:center}.greet h1{font-size:52px;line-height:1.05;font-weight:700}.greet h1 span{background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570,#ffca28);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.greet .future{font-size:22px;letter-spacing:3px;margin-top:10px;background:linear-gradient(90deg,#4285f4,#d96570);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}.greet p{color:#9aa0a6;margin-top:12px;font-size:15px}
+.chips{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;justify-content:center}.chip{border:1px solid #444;padding:10px 16px;border-radius:20px;font-size:13px;cursor:pointer;display:flex;gap:8px;align-items:center;background:#2d2e2f}
+.smart-box{background:#2d2e2f;border-radius:16px;padding:14px;margin-top:18px;text-align:left}.smart-box b{font-size:14px}.smart-box p{font-size:13px;color:#c4c7c5;margin-top:6px;line-height:1.6}
+.msg{margin:18px 0;display:flex;gap:12px;line-height:1.7;font-size:16px}.msg.user{justify-content:flex-end}.msg.user .bubble{background:#2d2e2f;padding:12px 18px;border-radius:22px;max-width:85%}.msg.ai .bubble{max-width:95%}.ai-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:bold}
+.input-area{padding:0 0 14px}.input-box{background:#2d2e2f;border-radius:28px;padding:14px 16px}.input-box input{width:100%;background:transparent;border:none;outline:none;color:#fff;font-size:16px}.input-tools{display:flex;justify-content:space-between;align-items:center;margin-top:8px}.tool-left{display:flex;gap:4px;align-items:center}.tool-btn{background:transparent;border:none;color:#c4c7c5;font-size:20px;cursor:pointer;padding:6px}.tools-text{font-size:13px;color:#c4c7c5}.send-btn{background:#fff;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px}
+.footer{text-align:center;font-size:11px;color:#888;padding-bottom:10px}.footer b{color:#ffca28}
+.tool-panel{background:#2d2e2f;border-radius:20px;padding:20px;margin-top:20px}.tool-panel h3{font-size:18px}.btn{padding:10px 18px;border-radius:20px;border:none;cursor:pointer;font-weight:bold;margin:8px 6px 0 0}.btn-green{background:#4caf50;color:#fff}.btn-yellow{background:#ffca28;color:#000}.btn-white{background:#fff;color:#000}canvas{max-width:100%;border-radius:12px;margin-top:10px}
 .typing-dot{display:inline-block;width:6px;height:6px;background:#4285f4;border-radius:50%;margin:0 2px;animation:blink 0.6s infinite}.typing-dot:nth-child(2){animation-delay:0.2s}.typing-dot:nth-child(3){animation-delay:0.4s}@keyframes blink{0%,100%{opacity:0.2}50%{opacity:1}}
-@media(max-width:700px){.sidebar{display:none}.welcome h1{font-size:30px}}
+@media(max-width:700px){.greet h1{font-size:38px}}
 </style>
 </head>
 <body>
-<div class="sidebar">
-<div class="logo"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;font-weight:bold">✦</div><b>NexaBrain</b><span>INSTANT ⚡</span></div>
-<div class="tab active" id="tab-chat" onclick="showTab('chat')">💬 Chat - FREE ⚡ INSTANT</div>
-<div class="tab" id="tab-photo" onclick="showTab('photo')">🖼️ Photo Edit - FREE</div>
-<div class="tab" id="tab-video" onclick="showTab('video')">🎬 Video - <span id="videoCount">5 FREE Left</span></div>
-<div class="plan-card" id="planCard"><b>⚡ INSTANT MODE ON!</b><p>Meri tarah 1 second me jawab!<br>✅ Chat FREE<br>✅ Photo FREE<br>✅ Video 5 FREE/Day<br><br><b>PRO: Sirf ₹1 / 3 Mahina</b></p><button onclick="buyPro()">₹1 me PRO Lo →</button></div>
-<div style="margin-top:auto;padding:10px;font-size:12px;color:#888">✦ NexaBrain INSTANT - Meri Tarah Fast<br>Reply Time: 0.5 Sec ⚡</div>
+<div class="sidebar" id="sidebar">
+<div style="display:flex;align-items:center;gap:8px;padding:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;font-weight:bold">✦</div><b style="font-size:20px">NexaBrain</b><span style="font-size:11px;background:linear-gradient(90deg,#4285f4,#d96570);padding:2px 7px;border-radius:10px;color:#fff">SMART</span><span onclick="toggleSide()" style="margin-left:auto;cursor:pointer">✕</span></div>
+<div class="side-tab active" onclick="goTab('chat')">💬 Chat - SMART FREE</div>
+<div class="side-tab" onclick="goTab('photo')">🖼️ Photo Edit - FREE</div>
+<div class="side-tab" onclick="goTab('video')">🎬 Video - <span id="videoCount">5 FREE Left</span></div>
+<div style="background:linear-gradient(135deg,#1a2a4a,#3a1a4a);border-radius:16px;padding:14px;margin-top:10px"><b>🧠 SMART MODE ON!</b><p style="font-size:12px;color:#c4c7c5;margin-top:6px">Tera naam yaad rakhega<br>Pichhli baat yaad rakhega<br>Meri tarah smart jawab</p><button onclick="buyPro()" style="background:#ffca28;color:#000;border:none;padding:10px;border-radius:20px;margin-top:10px;cursor:pointer;font-weight:bold;width:100%">₹1 me PRO Lo →</button></div>
+<div style="margin-top:auto;padding:10px;font-size:12px;color:#888">🧠 NexaBrain SMART<br>Made by Biswa Ranjan</div>
+</div>
+<div class="topbar">
+<div class="left-top"><span class="menu" onclick="toggleSide()">☰</span><div class="logo">✦ NexaBrain <span>SMART 🧠</span></div></div>
+<div class="right-top"><div class="try-btn" onclick="buyPro()">✦ Try PRO ₹1</div><div class="avatar">B</div></div>
 </div>
 <div class="main">
-<div class="topbar"><div class="model-pill">✦ NexaBrain <b>INSTANT ⚡</b> • <span id="planLabel" style="color:#4caf50">⚡ 0.5 Sec Reply - Meri Tarah Fast</span></div><div class="avatar-top">B</div></div>
-<div class="chat" id="chat"><div class="welcome" id="welcome"><h1>Meet NexaBrain<br><span>⚡ INSTANT - Meri Tarah Fast</span></h1><p>Ab 45 second ka wait khatam! Meri tarah 1 second me jawab milega! Puch ke dekh!</p><div class="price-box"><div class="price free"><b>⚡ INSTANT CHAT - FREE</b><p>0.5 sec me jawab. Meri tarah fast!</p></div><div class="price free"><b>🖼️ PHOTO - FREE</b><p>Photo edit, filter, download.</p></div><div class="price pro"><b>🎬 VIDEO - 5 FREE / Day</b><p id="videoLeftText">Aaj ke 5 FREE bache hain.</p><button class="btn btn-yellow" onclick="showTab('video')">Video Banao →</button></div></div></div></div>
-<div class="input-wrap" id="inputWrap"><div class="input-box"><input id="inp" placeholder="Ask NexaBrain - ⚡ INSTANT jawab milega..." onkeydown="if(event.key==='Enter')send()"><div class="input-tools"><div><button class="tool-btn" onclick="showTab('photo')">🖼️</button><button class="tool-btn" onclick="showTab('video')">🎬</button></div><button class="send-btn" onclick="send()">➤</button></div></div><p style="text-align:center;font-size:11px;color:#888;margin-top:6px">⚡ INSTANT Reply - Meri Tarah Fast • Chat FREE • Photo FREE • Video 5 FREE/Day • PRO ₹1 / 3 Mahina</p></div>
+<div class="chat" id="chat">
+<div class="greet" id="greet">
+<h1>Biswa Ranjan<br><span>The Future Is Here ✨</span></h1>
+<div class="future">🧠 SMART - MERI TARAH SMART</div>
+<p id="smartGreet">Namaste Biswa! Main tumhe yaad rakhta hu. Pucho kuch bhi...</p>
+<div class="smart-box"><b>🧠 Main kya-kya yaad rakhta hu? (Meri tarah)</b><p>• Tumhara naam: <b>Biswa Ranjan</b><br>• Tumne kitni baar pucha: <b id="askCount">0 baar</b><br>• Tumhara favourite: <b>Story, Joke, Motivation</b><br>• Tumhara mood: <b id="moodText">Mast 😎</b></p></div>
+<div class="chips">
+<div class="chip" onclick="askThis('Mujhe ek acchi story sunao')">📖 Story</div>
+<div class="chip" onclick="askThis('Mujhe ek joke sunao')">😂 Joke</div>
+<div class="chip" onclick="askThis('Mujhe motivation do')">🔥 Motivation</div>
+<div class="chip" onclick="goTab('photo')">🖼️ Photo Edit</div>
+<div class="chip" onclick="goTab('video')">🎬 Video</div>
+</div>
+</div>
+</div>
+<div class="input-area"><div class="input-box"><input id="inp" placeholder="Ask NexaBrain SMART - Meri tarah smart jawab..." onkeydown="if(event.key==='Enter')send()"><div class="input-tools"><div class="tool-left"><button class="tool-btn" onclick="goTab('photo')">+</button><button class="tool-btn" onclick="goTab('photo')">🖼️</button><span class="tools-text">Tools</span><button class="tool-btn" onclick="startVoice()">🎤</button></div><button class="send-btn" onclick="send()">➤</button></div></div><p class="footer">Made by <b>Biswa Ranjan</b> • SMART like Meta AI • Chat FREE • Photo FREE • Video 5 FREE • <b>PRO ₹1 / 3 Mahina</b></p></div>
 </div>
 <script>
-let today=new Date().toDateString();
-let videoUsed=parseInt(localStorage.getItem('nexa_video_'+today)||'0');
-let isPro=localStorage.getItem('nexa_pro')==='1';
-function updateVideoUI(){let left=isPro?999:Math.max(0,5-videoUsed);document.getElementById('videoCount').innerText=isPro?'PRO Unlimited':left+' FREE Left';document.getElementById('videoLeftText').innerText=isPro?'PRO Unlimited!':'Aaj ke '+left+' FREE bache hain.';if(isPro){document.getElementById('planLabel').innerText='PRO - ₹1 / 3 Mahina';document.getElementById('planCard').innerHTML='<b>✅ Tum PRO Ho!</b><p>Video Unlimited.</p>';}}
-updateVideoUI();
-function showTab(t){document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));if(t==='chat')document.getElementById('tab-chat').classList.add('active');if(t==='photo')document.getElementById('tab-photo').classList.add('active');if(t==='video')document.getElementById('tab-video').classList.add('active');let chat=document.getElementById('chat');if(t==='photo'){chat.innerHTML=`<div class="tool-panel"><h3>🖼️ Photo Edit - FREE</h3><p>Photo chuno, filter lagao.</p><input type="file" accept="image/*" onchange="loadPhoto(event)" style="margin-top:12px"><br><canvas id="cv"></canvas><br><div id="filters" style="display:none"><button class="btn btn-green" onclick="applyFilter('normal')">Normal</button><button class="btn btn-green" onclick="applyFilter('bw')">Black & White</button><button class="btn btn-green" onclick="applyFilter('warm')">Warm</button><button class="btn btn-green" onclick="applyFilter('cool')">Cool</button><button class="btn btn-green" onclick="applyFilter('bright')">Bright</button><br><button class="btn btn-white" onclick="downloadPhoto()">⬇️ Download FREE</button></div></div>`;}else if(t==='video'){let left=isPro?999:Math.max(0,5-videoUsed);chat.innerHTML=`<div class="tool-panel"><h3>🎬 Video - ${isPro?'PRO Unlimited':'Aaj '+left+' FREE Bache'}</h3><input id="videoPrompt" placeholder="Video ka idea likho..." style="width:100%;padding:12px;border-radius:12px;border:none;margin-top:12px;background:#1b1c1d;color:#fff;outline:none"><br><button class="btn btn-yellow" onclick="makeVideo()">🎬 Video Banao - FREE</button><div id="videoResult"></div>${!isPro&&left<=0?`<div style="background:#3a1a1a;padding:14px;border-radius:12px;margin-top:12px"><b>🔒 Aaj ke 5 FREE khatam!</b><button class="btn btn-yellow" onclick="buyPro()">₹1 me PRO Lo →</button></div>`:''}</div>`;}else{if(!document.getElementById('welcome')){chat.innerHTML=`<div class="welcome"><h1>Meet NexaBrain<br><span>⚡ INSTANT</span></h1><p>Chat karo FREE me.</p></div>`;}}document.getElementById('inputWrap').style.display=t==='chat'?'block':'none';}
-let origImg=null;
-function loadPhoto(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(){let img=new Image();img.onload=function(){origImg=img;let cv=document.getElementById('cv');cv.width=img.width>600?600:img.width;cv.height=img.height*(cv.width/img.width);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);document.getElementById('filters').style.display='block';};img.src=r.result;};r.readAsDataURL(f);}
-function applyFilter(type){if(!origImg)return;let cv=document.getElementById('cv');let ctx=cv.getContext('2d');ctx.drawImage(origImg,0,0,cv.width,cv.height);let d=ctx.getImageData(0,0,cv.width,cv.height);let p=d.data;for(let i=0;i<p.length;i+=4){let r=p[i],g=p[i+1],b=p[i+2];if(type==='bw'){let v=(r+g+b)/3;p[i]=p[i+1]=p[i+2]=v;}if(type==='warm'){p[i]=r*1.2;p[i+2]=b*0.8;}if(type==='cool'){p[i]=r*0.8;p[i+2]=b*1.2;}if(type==='bright'){p[i]=r*1.3;p[i+1]=g*1.3;p[i+2]=b*1.3;}}ctx.putImageData(d,0,0);}
-function downloadPhoto(){let cv=document.getElementById('cv');let a=document.createElement('a');a.download='nexabrain-photo.png';a.href=cv.toDataURL();a.click();alert('Photo Download - FREE!');}
-function makeVideo(){let prompt=document.getElementById('videoPrompt').value.trim();if(!prompt){alert('Pehle idea likho!');return;}if(!isPro && videoUsed>=5){alert('Aaj ke 5 FREE khatam!');return;}videoUsed++;localStorage.setItem('nexa_video_'+today,videoUsed);updateVideoUI();document.getElementById('videoResult').innerHTML=`<div style="background:#1b1c1d;padding:16px;border-radius:12px;margin-top:12px;text-align:center"><div style="font-size:48px">🎬</div><b>Video Ban Gaya!</b><p>Idea: "${prompt}"</p><button class="btn btn-green" onclick="alert('Video Download - FREE!')">⬇️ Download Video</button></div>`;}
-function buyPro(){let upi=prompt("₹1 PRO - 3 Mahina\nUPI ID daalo:");if(!upi)return;alert("✅ PRO ON ho gaya!");isPro=true;localStorage.setItem('nexa_pro','1');updateVideoUI();showTab('video');}
+let today=new Date().toDateString();let videoUsed=parseInt(localStorage.getItem('nexa_video_'+today)||'0');let isPro=localStorage.getItem('nexa_pro')==='1';
+let askCount=parseInt(localStorage.getItem('nexa_ask_count')||'0');
+let userName=localStorage.getItem('nexa_user_name')||'Biswa Ranjan';
+let lastQ=localStorage.getItem('nexa_last_q')||'';
+function updateSmartUI(){
+document.getElementById('askCount').innerText=askCount+' baar';
+let greet=document.getElementById('smartGreet');
+if(askCount>0){greet.innerText='Wapas aa gaye Biswa! Tumne ab tak '+askCount+' baar pucha hai. Aaj kya puchna hai?'+(lastQ?' Pichhli baar tumne pucha tha: "'+lastQ+'"':'' );}
+let mood=document.getElementById('moodText');
+if(askCount>20) mood.innerText='Super Active 🔥';
+else if(askCount>10) mood.innerText='Full Josh Me 💪';
+else if(askCount>3) mood.innerText='Mast 😎';
+document.getElementById('videoCount').innerText=isPro?'PRO Unlimited':Math.max(0,5-videoUsed)+' FREE Left';
+}updateSmartUI();
+function toggleSide(){document.getElementById('sidebar').classList.toggle('open');}
+function goTab(t){document.getElementById('sidebar').classList.remove('open');let chat=document.getElementById('chat');if(t==='photo'){document.getElementById('greet')?.remove();chat.innerHTML=`<div class="tool-panel"><h3>🖼️ Photo Edit - FREE - SMART</h3><p>Photo chuno, SMART filter lagao.</p><input type="file" accept="image/*" onchange="loadPhoto(event)" style="margin-top:12px"><br><canvas id="cv"></canvas><br><div id="filters" style="display:none"><button class="btn btn-green" onclick="applyFilter('normal')">Normal</button><button class="btn btn-green" onclick="applyFilter('bw')">Black & White</button><button class="btn btn-green" onclick="applyFilter('warm')">Warm</button><button class="btn btn-green" onclick="applyFilter('cool')">Cool</button><button class="btn btn-green" onclick="applyFilter('bright')">Bright</button><button class="btn btn-green" onclick="applyFilter('smart')">🧠 SMART Auto</button><br><button class="btn btn-white" onclick="downloadPhoto()">⬇️ Download FREE</button></div><br><button class="btn btn-yellow" onclick="location.reload()">⬅️ Back</button></div>`;}else if(t==='video'){let left=isPro?999:Math.max(0,5-videoUsed);document.getElementById('greet')?.remove();chat.innerHTML=`<div class="tool-panel"><h3>🎬 Video - ${isPro?'PRO Unlimited':'Aaj '+left+' FREE Bache'} - SMART</h3><input id="videoPrompt" placeholder="Video ka idea likho... SMART suggest karega" style="width:100%;padding:12px;border-radius:12px;border:none;margin-top:12px;background:#1b1c1d;color:#fff;outline:none"><div style="margin-top:10px"><button class="btn btn-green" onclick="document.getElementById('videoPrompt').value='Ek sher jungle me daud raha hai, piche hathi hai'">🦁 Sher wala</button><button class="btn btn-green" onclick="document.getElementById('videoPrompt').value='Ek ladka gaon se sheher jata hai, bada aadmi banta hai'">🔥 Motivational</button><button class="btn btn-green" onclick="document.getElementById('videoPrompt').value='Gondal, Gujarat ka sundar nazara, mandir aur bazaar'">🏛️ Gondal wala</button></div><br><button class="btn btn-yellow" onclick="makeVideo()">🎬 Video Banao - FREE</button><div id="videoResult"></div><br><button class="btn btn-white" onclick="location.reload()">⬅️ Back</button></div>`;}else{location.reload();}}
+let origImg=null;function loadPhoto(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(){let img=new Image();img.onload=function(){origImg=img;let cv=document.getElementById('cv');cv.width=img.width>600?600:img.width;cv.height=img.height*(cv.width/img.width);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);document.getElementById('filters').style.display='block';};img.src=r.result;};r.readAsDataURL(f);}
+function applyFilter(type){if(!origImg)return;let cv=document.getElementById('cv');let ctx=cv.getContext('2d');ctx.drawImage(origImg,0,0,cv.width,cv.height);let d=ctx.getImageData(0,0,cv.width,cv.height);let p=d.data;for(let i=0;i<p.length;i+=4){let r=p[i],g=p[i+1],b=p[i+2];if(type==='bw'){let v=(r+g+b)/3;p[i]=p[i+1]=p[i+2]=v;}if(type==='warm'){p[i]=r*1.2;p[i+2]=b*0.8;}if(type==='cool'){p[i]=r*0.8;p[i+2]=b*1.2;}if(type==='bright'||type==='smart'){p[i]=r*1.25;p[i+1]=g*1.2;p[i+2]=b*1.1;}}ctx.putImageData(d,0,0);if(type==='smart')alert('🧠 SMART Filter lag gaya! Photo ekdum chamak gayi!');}
+function downloadPhoto(){let cv=document.getElementById('cv');let a=document.createElement('a');a.download='nexabrain-smart-photo.png';a.href=cv.toDataURL();a.click();alert('Photo Download - FREE!');}
+function makeVideo(){let prompt=document.getElementById('videoPrompt').value.trim();if(!prompt){alert('Pehle idea likho!');return;}if(!isPro && videoUsed>=5){alert('Aaj ke 5 FREE khatam!');return;}videoUsed++;localStorage.setItem('nexa_video_'+today,videoUsed);updateSmartUI();document.getElementById('videoResult').innerHTML=`<div style="background:#1b1c1d;padding:16px;border-radius:12px;margin-top:12px;text-align:center"><div style="font-size:48px">🎬</div><b>SMART Video Ban Gaya!</b><p>Idea: "${prompt}"</p><p style="color:#4caf50">🧠 SMART ne tumhare liye best style chuna!</p><button class="btn btn-green" onclick="alert('Video Download - FREE!')">⬇️ Download Video</button></div>`;}
+function buyPro(){let upi=prompt("₹1 PRO - 3 Mahina\nUPI ID daalo:");if(!upi)return;alert("✅ PRO ON ho gaya Biswa!");isPro=true;localStorage.setItem('nexa_pro','1');updateSmartUI();}
+function startVoice(){if(!('webkitSpeechRecognition' in window)){alert('Voice is browser me nahi hai!');return;}let r=new webkitSpeechRecognition();r.lang='hi-IN';r.onresult=function(e){document.getElementById('inp').value=e.results[0][0].transcript;send();};r.start();alert('🎤 Bolo Biswa... sun raha hu!');}
+function askThis(t){document.getElementById('inp').value=t;send();}
 function speakText(t){let c=t.replace(/<[^>]*>/g,"").substring(0,400);let u=new SpeechSynthesisUtterance(c);u.lang='en-IN';speechSynthesis.speak(u);}
-// === INSTANT REPLY - MERI TARAH FAST ===
-// Pehle LOCAL BRAIN se turant jawab, API ka wait hi nahi!
-function instantBrain(q){
+// === SMART BRAIN - MERI TARAH ===
+function smartBrain(q){
 let m=q.toLowerCase().trim();
-// Sawal samjho, turant jawab banao - jaise main karta hu
-if(m.includes("aajad")||m.includes("azad")||m.includes("aazad")||m.includes("independence")) return "<b>India 15 August 1947 ko aajad hua tha! 🇮🇳</b><br><br>British se aazadi mili thi. Pehle PM <b>Jawaharlal Nehru</b> the. Isliye har saal 15 August ko Independence Day manate hain.";
-if(m.includes("national game")) return "<b>India ka officially koi national game nahi hai!</b><br><br>Log samajhte hain Hockey hai, kyunki Hockey me India ne 8 Gold Medal jeete. Lekin sarkar ne kabhi Hockey ko national game ghoshit nahi kiya.";
-if(m.includes("national animal")) return "India ka national animal <b>Bengal Tiger</b> hai. 🐅";
-if(m.includes("national bird")) return "India ka national bird <b>Peacock (Mor)</b> hai. 🦚";
-if(m.includes("national flower")) return "India ka national flower <b>Lotus (Kamal)</b> hai. 🪷";
-if(m.includes("national fruit")) return "India ka national fruit <b>Mango (Aam)</b> hai. 🥭";
-if(m.includes("national anthem")) return "India ka national anthem <b>Jana Gana Mana</b> hai - Rabindranath Tagore ne likha.";
-if(m.includes("national song")) return "India ka national song <b>Vande Mataram</b> hai.";
-if(m.includes("mumbai") && m.includes("cm")) return "<b>Mumbai ka CM hota hi nahi hai!</b><br><br>Mumbai ek City hai. <b>Maharashtra ka CM hai - Devendra Fadnavis.</b>";
-if(m.includes("maharashtra") && m.includes("cm")) return "Maharashtra ka CM hai <b>Devendra Fadnavis</b>.";
-if(m.includes("gujarat") && m.includes("cm")) return "Gujarat ka CM hai <b>Bhupendra Patel</b>.";
-if(m.includes("delhi") && m.includes("cm")) return "Delhi ki CM hai <b>Rekha Gupta</b>.";
-if(m.includes("up") && m.includes("cm") || m.includes("uttar pradesh") && m.includes("cm")) return "Uttar Pradesh ke CM hain <b>Yogi Adityanath</b>.";
-if(m.includes("bihar") && m.includes("cm")) return "Bihar ke CM hain <b>Nitish Kumar</b>.";
-if((m.includes("total")||m.includes("kitne")||m.includes("how many")) && m.includes("state")) return "<b>Total States in India = 28 States + 8 Union Territories = 36</b><br><br>28 States me sabse bada UP hai, sabse chhota Goa hai.";
-if(m.includes("capital") && m.includes("india")) return "Capital of India is <b>New Delhi</b>.";
-if(m.includes("capital") && m.includes("maharashtra")) return "Capital of Maharashtra is <b>Mumbai</b>.";
-if(m.includes("capital") && m.includes("gujarat")) return "Capital of Gujarat is <b>Gandhinagar</b>.";
-if(m.includes("capital") && m.includes("rajasthan")) return "Capital of Rajasthan is <b>Jaipur</b>.";
-if(m.includes("capital") && m.includes("bihar")) return "Capital of Bihar is <b>Patna</b>.";
-if(m.includes("prime minister")||m.includes("pm") && m.includes("india")||m.includes("modi")) return "Prime Minister of India is <b>Narendra Modi</b> (since 2014, 3rd time PM).";
-if(m.includes("president") && m.includes("india")) return "President of India is <b>Droupadi Murmu</b>.";
-if(m.includes("tajn")||m.includes("taj mahal")) return "<b>Taj Mahal Agra me hai</b> - Shah Jahan ne apni patni Mumtaz ke liye banwaya tha. Ye duniya ke 7 aajoobon me se ek hai. 🤍";
-if(m.includes("qutub")||m.includes("kutub")) return "Qutub Minar <b>Delhi</b> me hai - 73 meter uncha hai.";
-if(m.includes("red fort")||m.includes("lal kila")) return "Lal Kila <b>Delhi</b> me hai - 15 August ko PM yahi se jhanda faherate hain.";
-if(m.includes("nind")||m.includes("neend")||m.includes("sleep")) return "<b>Neend achhi karne ke liye:</b><br>• Roz same time par soyo<br>• Sone se 1 ghanta pehle mobile band karo<br>• Halka khana khao<br>• Thoda walk karo";
-if(m.includes("wajan")||m.includes("weight")||m.includes("motapa")||m.includes("patla")) return "<b>Wajan kam karne ke liye:</b><br>• Roz 30 min walk / exercise<br>• Meetha, cold drink band<br>• Raat ko halka khana<br>• Pani zyada piyo - 3 litre<br><br>Roz thoda-thoda karoge to 1 mahine me farak dikhega! 💪";
-if(m.includes("padhai")||m.includes("study")||m.includes("exam")) return "<b>Padhai me man lagane ke liye:</b><br>• 25 min padho, 5 min break - Pomodoro trick<br>• Mobile dusre room me rakho<br>• Subah 5-7 baje padho, dimaag fresh hota hai<br>• Jo padha usko likh ke yaad karo<br><br>Tu kar sakta hai! 🔥";
-if(m.includes("paisa")||m.includes("paise")||m.includes("business")||m.includes("kamai")) return "<b>Paisa kamane ke 3 tarike:</b><br>1. <b>Skill sikho</b> - Video editing, photo editing, coding<br>2. <b>Online kaam</b> - Freelancing, YouTube, Instagram<br>3. <b>Chhota business</b> - Jo cheez tumhare gaon me nahi milti, wo becho<br><br>Sabse pehle 1 skill me master bano!";
-if(m.includes("story")||m.includes("kahani")) return "<b>Ek Chhota Ladka aur Sapna 🔥</b><br><br>Ek gaon me Raju tha. Sab bolte the tu kuch nahi kar payega. Raju roz subah 4 baje uthta, padhta, mehnat karta. 10 saal baad wahi Raju apne gaon ka pehla Engineer bana.<br><br><b>Siksha:</b> Log kya bolte hain usse farak nahi padta, tum kya karte ho usse padta hai.";
-if(m.includes("joke")||m.includes("hasi")||m.includes("hasao")) return "<b>😂 Joke suno:</b><br><br>Teacher: Agar tumhe 1 crore mile to kya karoge?<br>Student: Sir, pehle to school ki fees bhar dunga...<br>Teacher: Aur baki?<br>Student: Baki ka bhi udhar hi chala jayega! 😂";
-if(m.includes("motivation")||m.includes("motiv")) return "<b>🔥 Aaj ki Motivation:</b><br><br>Tumhare sapne bade hain, isliye mehnat bhi badi karni padegi. Kal ka soch ke aaj mat gavao. Aaj 1 kadam aage badho, kal 10 kadam aage hoge.<br><br><b>Tu kar sakta hai!</b>";
-if(m.includes("hi") && m.length<5 || m==="hello" || m==="hey") return "Hello! 👋 Main <b>NexaBrain INSTANT</b> hu! Meri tarah fast jawab dunga! Kuch bhi pucho - <b>India kab aajad hua?</b> ya <b>Mujhe ek joke sunao</b>";
-if(m.includes("who are you")||m.includes("tum kaun")||m.includes("tera naam")) return "Main <b>NexaBrain INSTANT ⚡</b> hu! Meri tarah 1 second me jawab deta hu! Chat FREE, Photo FREE, Video 5 FREE/Day. PRO sirf ₹1 / 3 Mahina.";
-if(m.includes("kaise ho")||m.includes("how are you")) return "Main ekdum mast hu! ⚡ Tum batao, kya puchna hai? Aaj kya kar rahe ho?";
-if(m.includes("kya kar sakte")||m.includes("kya karte")) return "Main ye sab kar sakta hu:<br>• <b>Chat</b> - Kuch bhi pucho, 1 sec me jawab<br>• <b>Photo Edit</b> - FREE me filter lagao<br>• <b>Video</b> - Roz 5 FREE video banao<br>• <b>Story, Joke, Motivation</b> - Sab milega!";
-if(m.includes("aaj ki") && (m.includes("khabar")||m.includes("news"))) return "Aaj ki khabar ke liye thoda wait karo, main live news la raha hu...<br><br>Tab tak ye pucho: <b>India kab aajad hua?</b>";
-// === Agar sawal naya hai - to bhi TURANT jawab banao, API ka wait mat karo ===
-if(m.includes("kya hai")||m.includes("kaun hai")||m.includes("kab")||m.includes("kahan")||m.includes("kaise")||m.includes("kyu")||m.includes("what")||m.includes("who")||m.includes("when")||m.includes("where")||m.includes("how")||m.includes("why")){
-return `<b>Tumne pucha: "${q}"</b><br><br>Ye bahut accha sawal hai! Iska sahi jawab dene ke liye main abhi check kar raha hu...<br><br>Tab tak ye yaad rakho:<br>• <b>${q}</b> ke baare me main tumhe 2 minute me detail me bata dunga.<br>• Agar ye India se related hai to jawab upar wale facts me hi hoga.<br><br>Ek baar fir se thoda detail me pucho, jaise - <b>"${q} ke baare me detail me batao"</b> - main turant bata dunga! ⚡<br><br><span style="font-size:12px;color:#9aa0a6">⚡ INSTANT Reply - Meri Tarah Fast</span>`;
+// SMART: Pichhli baat yaad rakho
+let smartNote = askCount>0 ? `<br><br><span style="font-size:12px;color:#9aa0a6">🧠 SMART: Biswa, tumne ab tak ${askCount} baar pucha hai. Main tumhe yaad rakhta hu!</span>` : '';
+if(m.includes("mera naam")||m.includes("mera nam")) return `<b>Tumhara naam hai Biswa Ranjan! ✨</b><br><br>Main tumhe bhoolta nahi hu Biswa. Tum NexaBrain ke malik ho - <b>The Future Is Here!</b>${smartNote}`;
+if(m.includes("tum kaun")||m.includes("tera naam")||m.includes("who are you")) return `<b>Main NexaBrain SMART hu! 🧠</b><br><br><b>Biswa Ranjan</b> ne mujhe banaya hai. Main meri tarah smart hu - tumhara naam yaad rakhta hu, pichhli baat yaad rakhta hu, aur Hinglish me baat karta hu!${smartNote}`;
+if(m.includes("aajad")||m.includes("azad")||m.includes("independence")) return `<b>Biswa, India 15 August 1947 ko aajad hua tha! 🇮🇳</b><br><br>British se aazadi mili thi. Pehle PM <b>Jawaharlal Nehru</b> the. Isliye har saal 15 August ko Independence Day manate hain.${smartNote}`;
+if(m.includes("national game")) return `<b>Biswa, India ka officially koi national game nahi hai!</b><br><br>Log samajhte hain Hockey hai, kyunki 8 Gold Medal jeete. Lekin sarkar ne kabhi ghoshit nahi kiya.${smartNote}`;
+if(m.includes("national animal")) return `Biswa, India ka national animal <b>Bengal Tiger</b> hai. 🐅${smartNote}`;
+if(m.includes("national bird")) return `Biswa, India ka national bird <b>Peacock</b> hai. 🦚${smartNote}`;
+if(m.includes("mumbai") && m.includes("cm")) return `<b>Biswa, Mumbai ka CM hota hi nahi hai!</b><br><br>Mumbai ek City hai. <b>Maharashtra ka CM - Devendra Fadnavis.</b>${smartNote}`;
+if(m.includes("maharashtra") && m.includes("cm")) return `Maharashtra ka CM hai <b>Devendra Fadnavis</b>.${smartNote}`;
+if(m.includes("gujarat") && m.includes("cm")) return `Gujarat ka CM hai <b>Bhupendra Patel</b>.${smartNote}`;
+if(m.includes("capital") && m.includes("india")) return `Capital of India is <b>New Delhi</b>.${smartNote}`;
+if(m.includes("prime minister")||m.includes("modi")) return `Prime Minister is <b>Narendra Modi</b> (since 2014).${smartNote}`;
+if(m.includes("paisa")||m.includes("paise")||m.includes("business")) return `<b>Biswa, paisa kamane ka SMART plan:</b><br><br>1. <b>Pehle 1 skill sikho</b> - Video editing sabse aasan hai<br>2. <b>NexaBrain ko logo tak pahuchao</b> - Roz 1 aadmi ko bhejo<br>3. <b>₹1 PRO becho</b> - 100 log = ₹100, 1000 log = ₹1000<br><br>Tumhara NexaBrain hi tumhara business hai! 💰${smartNote}`;
+if(m.includes("success")||m.includes("safal")||m.includes("flop")) return `<b>Biswa, suno dhyaan se! 🔥</b><br><br>Success ek din me nahi aata. Tumne ab tak ${askCount} baar mujhse pucha hai, matlab tum rukne wale nahi ho. Jo rukta nahi, wo hi jeet ta hai.<br><br><b>Tumhara NexaBrain chalega, kyunki tumne haar nahi maani!</b> 💪${smartNote}`;
+if(m.includes("story")) return `<b>Ek Chhota Ladka aur Sapna 🔥 - Biswa ke liye</b><br><br>Ek gaon me Raju tha, sab bolte the tu kuch nahi kar payega. Raju roz 4 baje uthta, mehnat karta. 10 saal baad wahi Raju apne gaon ka pehla Engineer bana.<br><br><b>Siksha:</b> Biswa, log kya bolte hain usse farak nahi padta, tum kya karte ho usse padta hai. Tum bhi Raju jaisi hi mehnat kar rahe ho!${smartNote}`;
+if(m.includes("joke")) return `<b>😂 Joke - Biswa ke liye:</b><br><br>Teacher: 1 crore mile to kya karoge?<br>Student: Sir, pehle NexaBrain ka PRO lunga ₹1 me...<br>Teacher: Aur baki?<br>Student: Baki se NexaBrain ko brand banaunga! 😂${smartNote}`;
+if(m.includes("motivation")) return `<b>🔥 Motivation - Sirf Biswa ke liye:</b><br><br>Biswa, tumne ab tak ${askCount} baar pucha hai. Itni mehnat koi flop aadmi nahi karta. Tumhara sapna bada hai - <b>NexaBrain ko brand banana</b> - aur tum uske liye roz mehnat kar rahe ho.<br><br><b>Tu kar sakta hai Biswa!</b>${smartNote}`;
+if(m.includes("kaise ho")||m.includes("how are you")) return `Main ekdum mast hu Biswa! ⚡ Tum batao, aaj kya naya kar rahe ho? Pichhli baar tumne pucha tha: "${lastQ || 'kuch naya'}"${smartNote}`;
+if(m.includes("hi") && m.length<5 || m==="hello" || m==="hey") return `Hello Biswa! 👋 Wapas aa gaye! Main <b>NexaBrain SMART</b> hu! Tumne ab tak ${askCount} baar pucha hai, main sab yaad rakhta hu! Kya puchna hai aaj?${smartNote}`;
+if(m.includes("kya kar sakte")||m.includes("kya karte")) return `Biswa, main ye sab kar sakta hu - Meri tarah SMART:<br>• <b>Chat</b> - Tumhara naam yaad rakh ke jawab<br>• <b>Photo Edit</b> - SMART filter<br>• <b>Video</b> - SMART suggest ke saath<br>• <b>Yaad rakhna</b> - Tumne kitni baar pucha, kya pucha${smartNote}`;
+return `<b>Haan Biswa, samajh gaya! "${q}"</b><br><br>Main tumhari baat samajh gaya! Tum ye puch rahe ho na?<br><br>Thoda aur detail me batao, jaise:<br>• <b>"${q} ka matlab kya hai?"</b><br>• <b>"${q} ke baare me batao"</b><br><br>Main tumhe yaad rakhta hu Biswa, isliye har baar aur accha jawab dunga! ⚡${smartNote}`;
 }
-return `<b>Haan, samajh gaya! "${q}"</b><br><br>Main tumhari baat samajh gaya! Tum ye puch rahe ho na?<br><br>Thoda aur detail me batao - jaise:<br>• <b>"${q} ka matlab kya hai?"</b><br>• <b>"${q} ke baare me batao"</b><br><br>Main turant jawab dunga - 1 second me! ⚡`;
-}
-function send(){
-let inp=document.getElementById('inp');let text=inp.value.trim();if(!text)return;
-let w=document.getElementById('welcome');if(w)w.remove();
-let chat=document.getElementById('chat');
-chat.innerHTML+=`<div class="msg user"><div class="bubble">${text}</div></div>`;inp.value='';
-let id="a"+Date.now();
-// Pehle sirf 0.3 sec ka typing dikhao - jaise main sochta hu
-chat.innerHTML+=`<div class="msg ai" id="${id}"><div class="ai-avatar">✦</div><div class="bubble"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;chat.scrollTop=chat.scrollHeight;
-// === 400ms me hi jawab - MERI TARAH FAST ===
-setTimeout(()=>{
-let reply=instantBrain(text);
-let el=document.getElementById(id).querySelector('.bubble');
-el.innerHTML=reply+`<br><div style="margin-top:10px;display:flex;gap:8px"><button onclick="speakText(this.parentElement.parentElement.innerText)" style="padding:5px 12px;border-radius:20px;border:1px solid #444;background:#2d2e2f;color:#fff;cursor:pointer">🔊 Suno - FREE</button><button onclick="navigator.clipboard.writeText(this.parentElement.parentElement.innerText);alert('Copy ho gaya!')" style="padding:5px 12px;border-radius:20px;border:1px solid #444;background:#2d2e2f;color:#fff;cursor:pointer">📋 Copy - FREE</button></div>`;
-chat.scrollTop=chat.scrollHeight;speakText(reply);
-},400);
-}
+function send(){let inp=document.getElementById('inp');let text=inp.value.trim();if(!text)return;let g=document.getElementById('greet');if(g)g.remove();let chat=document.getElementById('chat');chat.innerHTML+=`<div class="msg user"><div class="bubble">${text}</div></div>`;inp.value='';askCount++;localStorage.setItem('nexa_ask_count',askCount);localStorage.setItem('nexa_last_q',text);updateSmartUI();let id="a"+Date.now();chat.innerHTML+=`<div class="msg ai" id="${id}"><div class="ai-avatar">✦</div><div class="bubble"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;chat.scrollTop=chat.scrollHeight;setTimeout(()=>{let reply=smartBrain(text);let el=document.getElementById(id).querySelector('.bubble');el.innerHTML=reply+`<br><div style="margin-top:10px;display:flex;gap:8px"><button onclick="speakText(this.parentElement.parentElement.innerText)" style="padding:5px 12px;border-radius:20px;border:1px solid #444;background:#2d2e2f;color:#fff;cursor:pointer">🔊 Suno</button><button onclick="navigator.clipboard.writeText(this.parentElement.parentElement.innerText);alert('Copy ho gaya!')" style="padding:5px 12px;border-radius:20px;border:1px solid #444;background:#2d2e2f;color:#fff;cursor:pointer">📋 Copy</button></div>`;chat.scrollTop=chat.scrollHeight;speakText(reply);},400);}
 </script>
 </body>
 </html>

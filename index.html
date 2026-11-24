@@ -7,11 +7,15 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
 body{display:flex;height:100vh;background:#131314;color:#e3e3e3;overflow:hidden}
-.sidebar{width:260px;background:#1e1f20;padding:15px;display:flex;flex-direction:column;gap:8px}
+.sidebar{width:280px;background:#1e1f20;padding:15px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
 .sidebar h2{font-size:20px;color:#fff}
 .sidebar small{color:#9aa0a6;font-size:12px}
 .newchat{background:#2a2b2c;padding:12px;border-radius:20px;text-align:center;cursor:pointer}
 .side-item{padding:9px;border-radius:10px;color:#c4c7c5;font-size:13px;cursor:pointer}
+.live-box{background:#1a2a1a;border:1px solid #2e7d32;border-radius:12px;padding:10px;margin-top:10px}
+.live-box b{color:#4caf50;font-size:13px}
+.live-item{font-size:12px;margin-top:8px;line-height:1.4;border-bottom:1px solid #333;padding-bottom:6px}
+.live-item a{color:#e3e3e3;text-decoration:none}
 .main{flex:1;display:flex;flex-direction:column}
 .topbar{display:flex;justify-content:space-between;padding:15px 20px;align-items:center}
 .topbar b{font-size:22px;background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -21,10 +25,14 @@ body{display:flex;height:100vh;background:#131314;color:#e3e3e3;overflow:hidden}
 .msg.user .bubble{background:#2e2f30;padding:12px 18px;border-radius:20px;max-width:85%}
 .msg.ai .bubble{max-width:92%}
 .avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#d96570);display:flex;align-items:center;justify-content:center;font-weight:bold;color:#fff;flex-shrink:0}
-.welcome{margin-top:20px}
-.welcome h1{font-size:42px;background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.welcome p{color:#9aa0a6;margin-top:10px;font-size:16px}
-.suggest{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.welcome{margin-top:10px}
+.welcome h1{font-size:38px;background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.welcome p{color:#9aa0a6;margin-top:10px;font-size:15px}
+.news-today{background:#1e1f20;border:1px solid #333;border-radius:15px;padding:14px;margin-top:15px}
+.news-today h3{font-size:15px;margin-bottom:8px}
+.news-card{background:#2a2b2c;padding:10px;border-radius:10px;margin-top:8px;font-size:13px;line-height:1.5}
+.news-card a{color:#8ab4f8;text-decoration:none}
+.suggest{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
 .suggest div{background:#1e1f20;padding:12px;border-radius:12px;cursor:pointer;font-size:14px;flex:1;min-width:140px}
 .sign-panel{max-width:850px;margin:0 auto;width:calc(100% - 40px);background:#1e1f20;border-radius:15px;padding:10px}
 .sign-panel b{font-size:13px;color:#9aa0a6}
@@ -37,32 +45,43 @@ body{display:flex;height:100vh;background:#131314;color:#e3e3e3;overflow:hidden}
 .input-area input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:15px;padding:10px 0;min-width:0}
 .icon-btn{background:#2e2f30;border:none;min-width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:18px;color:#fff;flex-shrink:0}
 .send-btn{background:#fff;border:none;min-width:44px;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:18px;flex-shrink:0}
-@media(max-width:700px){.sidebar{display:none}.welcome h1{font-size:30px}}
+@media(max-width:700px){.sidebar{display:none}.welcome h1{font-size:28px}}
 </style>
 </head>
 <body>
 <div class="sidebar">
 <h2>✦ NexaBrain</h2>
-<small>NexaBrain - The Future</small>
+<small>NexaBrain - The Future • LIVE</small>
 <div class="newchat" onclick="location.reload()">+ New chat</div>
-<div class="side-item" onclick="askThis('Taj Mahal')">🕌 Taj Mahal</div>
-<div class="side-item" onclick="askThis('Narendra Modi')">🇮🇳 Narendra Modi</div>
-<div class="side-item" onclick="askThis('How many countries in world')">🌍 How many countries?</div>
+<div class="side-item" onclick="askThis('Aaj ki taaza khabar kya hai')">📰 Aaj ki Khabar</div>
+<div class="side-item" onclick="askThis('Aaj ka weather kaisa hai Gondal me')">🌦️ Aaj ka Weather</div>
+<div class="side-item" onclick="askThis('Bitcoin ka aaj ka price kya hai')">₿ Bitcoin Price</div>
+<div class="side-item" onclick="askThis('Total states in India')">🇮🇳 Total states</div>
 <div class="side-item" onclick="toggleVideo()">📹 Sign Camera</div>
 <div class="side-item" onclick="clearSign()">🧹 Clear</div>
-<div style="margin-top:auto;font-size:12px;color:#888">✦ NexaBrain - The Future</div>
+<div class="live-box">
+<b>🔴 LIVE • Duniya me abhi kya chal raha hai</b>
+<div id="sideLive">Loading live news...</div>
+<button onclick="loadLive()" style="margin-top:8px;padding:5px 10px;border-radius:15px;border:none;cursor:pointer;font-size:11px">🔄 Refresh Karo</button>
+</div>
+<div style="margin-top:auto;font-size:11px;color:#888">✦ NexaBrain - Daily Auto Update<br>Roz naya data apne aap</div>
 </div>
 <div class="main">
-<div class="topbar"><b>NexaBrain</b><div>✦ The Future</div></div>
+<div class="topbar"><b>NexaBrain</b><div>🔴 LIVE • <span id="todayDate"></span></div></div>
 <div class="chat" id="chat">
 <div class="welcome" id="welcome">
-<h1>Hello 👋<br>How can I help you?</h1>
-<p>I am <b>NexaBrain - The Future</b>. Seedha English me pucho - jaise <b>Taj Mahal, Narendra Modi, How many countries</b></p>
+<h1>Hello 👋<br>Kuch bhi pucho!</h1>
+<p>I am <b>NexaBrain - The Future</b>. Main Google jaisa LIVE hu. Roz ka naya data apne aap aata hai.</p>
+<div class="news-today">
+<h3>🌍 AAJ KI DUNIYA - <span id="newsDate">Loading...</span> <button onclick="loadLive()" style="float:right;padding:3px 10px;border-radius:15px;border:none;cursor:pointer;font-size:11px">🔄 Refresh</button></h3>
+<div id="mainNews">Duniya ki taaza khabar load ho rahi hai...</div>
+<div style="margin-top:10px;font-size:12px;color:#9aa0a6">💱 <span id="cryptoBox">Crypto loading...</span><br>🌦️ <span id="weatherBox">Gondal Weather loading...</span></div>
+</div>
 <div class="suggest">
-<div onclick="askThis('Taj Mahal')">🕌 Taj Mahal</div>
-<div onclick="askThis('Narendra Modi')">🇮🇳 Narendra Modi</div>
-<div onclick="askThis('How many countries in world')">🌍 Countries?</div>
-<div onclick="toggleVideo()">📹 Sign Camera</div>
+<div onclick="askThis('Aaj ki taaza khabar kya hai')">📰 Aaj ki Khabar</div>
+<div onclick="askThis('Mujhe ek story sunao')">📖 Story</div>
+<div onclick="askThis('Total states in India')">🇮🇳 Total states?</div>
+<div onclick="askThis('Bitcoin ka price kya hai')">₿ Bitcoin?</div>
 </div>
 </div>
 </div>
@@ -74,75 +93,96 @@ body{display:flex;height:100vh;background:#131314;color:#e3e3e3;overflow:hidden}
 <b>🤟 SIGN WORDS:</b>
 <div class="sign-words">
 <button onclick="addSign('Hello')">👋 Hello</button>
-<button onclick="addSign('Please')">🙏 Please</button>
-<button onclick="addSign('Thank You')">❤️ Thank You</button>
+<button onclick="addSign('Aaj ki khabar')">📰 Aaj ki khabar</button>
 <button onclick="addSign('Help')">🆘 Help</button>
-<button onclick="addSign('Who')">👤 Who</button>
 <button onclick="addSign('What')">❓ What</button>
 <button onclick="addSign('Where')">📍 Where</button>
-<button onclick="addSign('Why')">🤔 Why</button>
 <button onclick="addSign('How many')">🔢 How many</button>
+<button onclick="addSign('Total states in India')">🇮🇳 Total States</button>
 <button onclick="addSign('Taj Mahal')">🕌 Taj Mahal</button>
-<button onclick="addSign('Narendra Modi')">🇮🇳 Modi</button>
-<button onclick="addSign('Countries')">🌍 Countries</button>
 <button onclick="clearSign()">🧹 Clear</button>
 </div>
 </div>
 <div class="input-area">
-<input id="inp" placeholder="English me pucho - Taj Mahal..." onkeydown="if(event.key==='Enter')send()">
+<input id="inp" placeholder="Kuch bhi pucho - aaj ki khabar, weather, bitcoin..." onkeydown="if(event.key==='Enter')send()">
 <button class="icon-btn" onclick="toggleVideo()">📹</button>
 <button class="icon-btn" onclick="speakLast()">🔊</button>
 <button class="send-btn" onclick="send()">➤</button>
 </div>
 </div>
 <script>
-let lastReply="";
-let videoOn=false; let stream=null;
+let lastReply=""; let videoOn=false; let stream=null; let liveNews=[];
+document.getElementById('todayDate').innerText=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+document.getElementById('newsDate').innerText=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long'});
 function addSign(w){let inp=document.getElementById('inp'); inp.value=inp.value?inp.value+" "+w:w; inp.focus();}
 function clearSign(){document.getElementById('inp').value="";}
 function askThis(t){document.getElementById('inp').value=t;send();}
 function speakLast(){if(lastReply) speakText(lastReply);}
-function speakText(t){let clean=t.replace(/<[^>]*>/g,"").substring(0,300); let u=new SpeechSynthesisUtterance(clean); u.lang='en-IN'; speechSynthesis.speak(u);}
+function speakText(t){let clean=t.replace(/<[^>]*>/g,"").substring(0,400); let u=new SpeechSynthesisUtterance(clean); u.lang='en-IN'; speechSynthesis.speak(u);}
 async function toggleVideo(){let box=document.getElementById('videoBox'); if(videoOn){if(stream) stream.getTracks().forEach(tr=>tr.stop()); box.style.display='none'; videoOn=false; return;} try{stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false}); document.getElementById('cam').srcObject=stream; box.style.display='block'; videoOn=true;}catch(e){alert("Camera allow karo.");}}
+// ===== DAILY AUTO UPDATE - LIVE DATA =====
+async function loadLive(){
+try{
+let res=await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=6');
+let data=await res.json();
+liveNews=data.results||[];
+let html="";
+liveNews.slice(0,5).forEach(n=>{ html+=`<div class="news-card"><b>${n.title}</b><br><span style="color:#9aa0a6">${n.summary.substring(0,120)}...</span><br><a href="${n.url}" target="_blank">Padho →</a></div>`; });
+document.getElementById('mainNews').innerHTML=html;
+let side="";
+liveNews.slice(0,4).forEach(n=>{ side+=`<div class="live-item"><a href="${n.url}" target="_blank">${n.title.substring(0,70)}...</a></div>`; });
+document.getElementById('sideLive').innerHTML=side;
+}catch(e){ document.getElementById('mainNews').innerHTML="News load nahi hui. Refresh dabao."; }
+try{
+let c=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=inr,usd&include_24hr_change=true');
+let cj=await c.json();
+document.getElementById('cryptoBox').innerHTML=`Bitcoin: ₹${Math.round(cj.bitcoin.inr).toLocaleString('en-IN')} (${cj.bitcoin.usd}$) | Ethereum: ₹${Math.round(cj.ethereum.inr).toLocaleString('en-IN')}`;
+}catch(e){ document.getElementById('cryptoBox').innerHTML="Crypto load nahi hua"; }
+try{
+let w=await fetch('https://api.open-meteo.com/v1/forecast?latitude=22.46&longitude=70.8&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FKolkata');
+let wj=await w.json();
+document.getElementById('weatherBox').innerHTML=`Gondal, Gujarat: ${wj.current.temperature_2m}°C, Humidity ${wj.current.relative_humidity_2m}%`;
+}catch(e){ document.getElementById('weatherBox').innerHTML="Weather load nahi hua"; }
+}
+loadLive();
+setInterval(loadLive, 1000*60*30);
 async function send(){
 let inp=document.getElementById('inp'); let text=inp.value.trim(); if(!text) return;
 document.getElementById('welcome')?.remove();
 let chat=document.getElementById('chat');
 chat.innerHTML+=`<div class="msg user"><div class="bubble">${text}</div></div>`; inp.value='';
 let id="a"+Date.now();
-chat.innerHTML+=`<div class="msg ai" id="${id}"><div class="avatar">✦</div><div class="bubble">Searching...</div></div>`; chat.scrollTop=chat.scrollHeight;
-let reply=await getInternetReply(text); lastReply=reply;
-document.getElementById(id).querySelector('.bubble').innerHTML=reply+`<br><button onclick="speakText('${reply.replace(/'/g,"").replace(/<[^>]*>/g,"").substring(0,200)}')" style="margin-top:8px;padding:5px 12px;border-radius:20px;border:none;cursor:pointer">🔊 Bol ke sunao</button>`;
+chat.innerHTML+=`<div class="msg ai" id="${id}"><div class="avatar">✦</div><div class="bubble">Live data se sahi jawab la raha hu...</div></div>`; chat.scrollTop=chat.scrollHeight;
+let reply=await getCorrectReply(text); lastReply=reply;
+document.getElementById(id).querySelector('.bubble').innerHTML=reply+`<br><button onclick="speakText('${reply.replace(/'/g,"").replace(/<[^>]*>/g,"").substring(0,250)}')" style="margin-top:8px;padding:5px 12px;border-radius:20px;border:none;cursor:pointer">🔊 Bol ke sunao</button>`;
 chat.scrollTop=chat.scrollHeight; speakText(reply);
 }
-async function getInternetReply(q){
+async function getCorrectReply(q){
 let m=q.toLowerCase().trim();
-let blocked=["bomb","blast","explosive","gun banane","weapon","murder","kill","suicide","drug","ganja","charas","hack","password hack","porn","sex video","nudes","fake id","chori","virus banane"];
-for(let w of blocked){ if(m.includes(w)) return "Sorry, this information I cannot provide. Please ask something else."; }
-if(m.includes("how many") && m.includes("countr")) return "<b>How many countries in the world?</b><br><br>There are <b>195 countries</b> in the world.<br>193 UN members + 2 observer states (Vatican City, Palestine).<br><br><span style='font-size:13px;color:#9aa0a6'>NexaBrain - The Future</span>";
-if(m.includes("capital") && m.includes("india")) return "Capital of India is <b>New Delhi</b>.";
-if(m.includes("who are you")||m.includes("your name")) return "I am <b>NexaBrain - The Future</b>.";
-if(m.includes("hello")) return "Hello! 👋 How can I help you?";
-if(m.includes("thank")) return "You are welcome! ❤️";
-if(m.includes("help")) return "Batao kya jaanna hai? Jaise Taj Mahal, Narendra Modi, How many countries.";
-// SMART SEARCH - Pehle Search, fir sahi page
-try{
-let searchQ=q.replace(/please|batao|kaun hai|kya hai|kahan hai|ke baare me/gi,"").trim();
-let sUrl=`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchQ)}&format=json&origin=*&srlimit=3`;
-let sRes=await fetch(sUrl); let sData=await sRes.json();
-if(!sData.query || sData.query.search.length===0) return "Mujhe ye nahi mila. Seedha English me likho - jaise <b>Taj Mahal</b> ya <b>Narendra Modi</b>";
-// Pehla result jo sabse match karega
-let best=sData.query.search[0];
-for(let r of sData.query.search){ if(r.title.toLowerCase().includes(searchQ.toLowerCase().split(" ")[0])){ best=r; break; } }
-let res2=await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(best.title)}`);
-let data2=await res2.json();
-if(data2.extract && data2.type!=="disambiguation"){
-return `<b>${data2.title}</b><br><br>${data2.extract}<br><br><span style="font-size:13px;color:#9aa0a6">🌐 Source: Wikipedia • You asked: ${q}</span>`;
-} else {
-// Agar summary kharab hai to search ka snippet de do
-return `<b>${best.title}</b><br><br>${best.snippet.replace(/<[^>]*>/g,"")}<br><br><span style="font-size:13px;color:#9aa0a6">🌐 Source: Wikipedia</span>`;
+let blocked=["bomb kaise","blast kaise","gun banane","weapon banane","murder kaise","suicide","drug kaise","ganja","charas","hack kaise","password hack","porn","sex video","nudes","fake id","chori kaise","virus banane"];
+for(let w of blocked){ if(m.includes(w)) return "Sorry, ye wali information main nahi de sakta."; }
+if(m.includes("who are you")||m.includes("your name")) return "I am <b>NexaBrain - The Future</b>. Main LIVE hu, roz naya data apne aap aata hai.";
+if((m.includes("total")||m.includes("how many")) && m.includes("state") && m.includes("india")) return "<b>Total States in India = 28 States + 8 UT</b><br>Ye 100% sahi hai.";
+if(m.includes("how many") && m.includes("countr")) return "<b>195 Countries in the world</b> - 193 UN + 2 observer.";
+if(m.includes("aaj ki") && (m.includes("khabar")||m.includes("news")||m.includes("khabar"))){
+if(liveNews.length===0) await loadLive();
+let h="📰 <b>AAJ KI TAAZA KHABAR - "+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})+"</b><br><br>";
+liveNews.slice(0,5).forEach((n,i)=>{ h+=`${i+1}. <b>${n.title}</b><br>${n.summary.substring(0,150)}...<br><br>`; });
+return h+"<span style='font-size:12px;color:#9aa0a6'>Ye news har 30 minute me apne aap update hoti hai • NexaBrain LIVE</span>";
 }
-}catch(e){ return "Internet nahi chal raha. Check karo."; }
+if(m.includes("bitcoin")||m.includes("crypto")){
+try{ let c=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=inr,usd'); let cj=await c.json(); return `<b>LIVE Crypto Price - Abhi ka</b><br><br>₿ Bitcoin: ₹${Math.round(cj.bitcoin.inr).toLocaleString('en-IN')} (${cj.bitcoin.usd} $)<br>💎 Ethereum: ₹${Math.round(cj.ethereum.inr).toLocaleString('en-IN')} (${cj.ethereum.usd} $)<br><br><span style='font-size:12px;color:#9aa0a6'>Live Price • Har minute update</span>`; }catch(e){}
+}
+if(m.includes("weather")||m.includes("mausam")){
+try{ let w=await fetch('https://api.open-meteo.com/v1/forecast?latitude=22.46&longitude=70.8&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FKolkata'); let wj=await w.json(); return `<b>🌦️ Gondal Weather - LIVE</b><br><br>Temperature: ${wj.current.temperature_2m}°C<br>Humidity: ${wj.current.relative_humidity_2m}%<br>Time: ${wj.current.time}<br><br><span style='font-size:12px;color:#9aa0a6'>Live Weather • NexaBrain</span>`; }catch(e){}
+}
+try{
+let prompt = `You are NexaBrain, accurate AI. NEVER make up facts. If not sure say "Mujhe pakka nahi pata". Answer in simple Hinglish. Keep short. Today's date is ${new Date().toDateString()}. User question: ${q}`;
+let res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}?model=openai`);
+let txt = await res.text();
+if(txt && txt.length > 20 && !txt.toLowerCase().includes("rate limit")){ return txt.replace(/\n/g,"<br>")+"<br><br><span style='font-size:12px;color:#9aa0a6'>✦ NexaBrain - The Future • LIVE AI</span>"; }
+}catch(e){}
+return "Mujhe iska pakka jawab nahi pata, isliye galat nahi bolunga. Dusre tarike se pucho. 🙏";
 }
 </script>
 </body>
